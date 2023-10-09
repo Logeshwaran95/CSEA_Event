@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { useNavigate } from 'react-router-dom';
@@ -6,14 +6,45 @@ import Modal from 'react-bootstrap/Modal'; // Import React-Bootstrap Modal
 import Button from 'react-bootstrap/Button'; // Import React-Bootstrap Button
 import Table from 'react-bootstrap/Table'; // Import React-Bootstrap Table
 import styles from './Home.module.css'; // Import the CSS module
+import Swal from 'sweetalert2';
 
 const Home = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false); // State to control the modal
   const [userName, setUserName] = useState('John Doe'); // Replace with the user's name
+  const Toast = Swal.mixin({
+    toast: true,
+  position: 'top-right',
+  iconColor: 'green',
+  customClass: {
+    popup: 'colored-toast'
+  },
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true
+  });
+
+  useEffect(() => {
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Signed in successfully',
+    });
+  }, []);
 
   const handleLogout = () => {
-    signOut(auth)
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to logout from Fantasy League!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, logout!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        signOut(auth)
       .then(() => {
         // Sign-out successful.
         navigate("/");
@@ -23,6 +54,11 @@ const Home = () => {
         // An error happened.
         console.error("Sign-out error:", error);
       });
+    }
+  })
+    
+
+    
   }
 
   const toggleModal = () => {

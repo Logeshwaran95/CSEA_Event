@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './Login.module.css'; // Import the CSS module
+import Swal from 'sweetalert2'; // Import SweetAlert2
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +21,11 @@ const Login = () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessage,
+      });
     }
   };
 
