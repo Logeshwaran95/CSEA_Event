@@ -1,0 +1,38 @@
+/* Home.module.css */
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .matchContainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  .matchList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .matchItem {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .matchItem:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Add more styles as needed */
+  

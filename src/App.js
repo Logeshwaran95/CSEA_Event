@@ -1,24 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import Home from './Components/Home';
+import Signup from './Pages/Signup/SignUP';
+import Login from './Pages/Login/Login';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth'; // Import Firebase auth methods
+import { auth } from './config/firebase'; // Import your Firebase configuration
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Check the authentication status when the app loads
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // User is signed in.
+        setUser(authUser);
+      } else {
+        // User is signed out.
+        setUser(null);
+      }
+    });
+
+    // Unsubscribe when the component unmounts to avoid memory leaks
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <section>
+          <Routes>
+            {/* Redirect to /home if the user is already signed in */}
+            <Route
+              path="/"
+              element={user ? <Navigate to="/home" /> : <Signup />}
+            />
+            <Route path="/home" element={<Home />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </section>
+      </div>
+    </Router>
   );
 }
 
