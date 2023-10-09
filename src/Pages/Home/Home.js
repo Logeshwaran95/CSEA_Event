@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { signOut } from "firebase/auth";
-import { auth } from '../config/firebase';
+import { auth } from '../../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import Modal from 'react-bootstrap/Modal'; // Import React-Bootstrap Modal
 import Button from 'react-bootstrap/Button'; // Import React-Bootstrap Button
@@ -81,7 +81,7 @@ const Home = () => {
   return (
     <div>
       <nav className={styles.nav}>
-        <h1>Welcome {userName}</h1> {/* Display the user's name */}
+        <h3>Welcome {userName}</h3> {/* Display the user's name */}
         <div>
           <button onClick={handleLogout}>Logout</button>
         </div>
