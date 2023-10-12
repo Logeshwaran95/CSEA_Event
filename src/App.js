@@ -5,6 +5,8 @@ import Login from './Pages/Login/Login';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth'; // Import Firebase auth methods
 import { auth } from './config/firebase'; // Import your Firebase configuration
+import Live from './Pages/LiveMatch/Live';
+import NavBar from './Components/Navbar/Navbar';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,8 +33,10 @@ function App() {
     <Router>
       <div>
         <section>
+        <NavBar/>
           <Routes>
             {/* Redirect to /home if the user is already signed in */}
+          
             <Route
               path="/"
               element={user ? <Navigate to="/home" /> : <Signup />}
@@ -40,6 +44,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/live" element={<Live />} />
           </Routes>
         </section>
       </div>

@@ -11,14 +11,22 @@
   
   .matchContainer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 90vw;
     padding: 20px;
+    text-align: center;
   }
   
   .matchList {
     list-style: none;
     padding: 0;
     margin: 0;
+  }
+
+  .list {
+    min-width: 50vw;
   }
   
   .matchItem {
@@ -35,4 +43,59 @@
   }
   
   /* Add more styles as needed */
-  
+  /* Define styles for the live match section */
+.liveMatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for team flags */
+.teamFlags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style for flag images */
+.flagImage {
+  width: 30vw;
+  height: 30vh;
+  margin: 0 10px;
+  border: 2px solid #e5e5e5;
+  /* border-radius: 50%; */
+}
+
+/* Style for "vs" text */
+.vs {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 10px;
+}
+
+/* Style for the current score */
+.currentScore {
+  font-size: 40px;
+  font-weight: bold;
+  margin:2rem;
+  color: #333;
+}
+
+.match{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.mat{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
