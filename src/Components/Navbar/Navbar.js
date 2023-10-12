@@ -9,6 +9,10 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Choices from '../../Pages/Choices/Choices';
+import Selection from '../../Pages/Selection/Selection';
+import Leadeboard from '../../Pages/Leaderboard/Leadeboard';
+import { Link } from 'react-router-dom';
 
 function OffcanvasExample() {
     const navigate = useNavigate();
@@ -38,9 +42,29 @@ function OffcanvasExample() {
   return (
     <>
       {['sm'].map((expand) => (
-        <Navbar  key={expand} bg="transparent" expand={expand} className="mb-3">
+        <Navbar  key={expand} bg="dark" expand={expand} className="mb-3"
+
+        // breakpoint={expand}
+       
+        fixed='top'
+        style={{
+          borderBottomLeftRadius: '20px',
+          borderBottomRightRadius: '20px',
+          padding:"1rem"
+        }}
+        >
           <Container fluid>
-            <Navbar.Brand href="#">SYNC</Navbar.Brand>
+            <Navbar.Brand 
+            onClick={
+                () => {
+                    navigate("/home");
+                }
+            }
+            style={{
+                cursor: "pointer",
+                color:"white"
+            }}
+            >SYNC</Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -53,9 +77,57 @@ function OffcanvasExample() {
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
-                <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Nav.Link href="#action1">Choose Players</Nav.Link>
-                  <Nav.Link href="#action2">Leaderboard</Nav.Link>
+                <Nav className="justify-content-center mr-auto flex-grow-1 pe-3">
+                <Nav.Link
+                  style={{
+                    color:"white"
+                  }}
+                  >
+
+                    <Link to="/home" style={{
+                        textDecoration:"none",
+                        color:"white",
+                        margin:"1rem"
+                    }}>Home</Link>
+                    
+                  </Nav.Link>
+                  <Nav.Link 
+                  style={{
+                    color:"white"
+                  }}
+                  >
+
+                    <Link to="/choices" style={{
+                        textDecoration:"none",
+                        color:"white",
+                        margin:"1rem"
+                    }}>Choose Players</Link>
+                    
+                  </Nav.Link>
+                  <Nav.Link
+                  style={{
+                    color:"white"
+                  }}
+                  
+                  >
+                     <Link to="/selection" style={{
+                        textDecoration:"none",
+                        color:"white",
+                        margin:"1rem"
+                     }}>My Selection</Link>
+                  </Nav.Link>
+                   <Nav.Link
+                  style={{
+                    color:"white"
+                  }}
+                  
+                  >
+                    <Link to="/leaderboard" style={{
+                        textDecoration:"none",
+                        color:"white",
+                        margin:"1rem"
+                    }}>Leaderboard</Link>
+                  </Nav.Link>
                 </Nav>
                 <Form className="d-flex">
                

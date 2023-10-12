@@ -1,0 +1,43 @@
+/* PlayerSelection.module.css */
+.player-selection-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .selected-players {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .player-list {
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .selected {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+  }
+  
+  li {
+    cursor: pointer;
+    padding: 5px;
+  }
+  
+  li:hover {
+    background-color: #e7e7e7;
+  }
+.remainingPoints{
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
+}

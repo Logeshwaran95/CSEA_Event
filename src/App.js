@@ -7,6 +7,9 @@ import { onAuthStateChanged } from 'firebase/auth'; // Import Firebase auth meth
 import { auth } from './config/firebase'; // Import your Firebase configuration
 import Live from './Pages/LiveMatch/Live';
 import NavBar from './Components/Navbar/Navbar';
+import Selection from './Pages/Selection/Selection';
+import Choices from './Pages/Choices/Choices';
+import Leaderboard from './Pages/Leaderboard/Leadeboard';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -29,11 +32,59 @@ function App() {
     };
   }, []);
 
+  const HomeScreen = () => {
+    return (
+      <div>
+        <NavBar/>
+        <Home/>
+      </div>
+    )
+  }
+
+  const LiveScreen = () => {
+    return (
+      <div>
+        <NavBar/>
+        <Live/>
+      </div>
+    )
+  }
+
+  const SelectionScreen = () => {
+    return (
+      <div>
+        <NavBar/>
+        <Selection/>
+      </div>
+    )
+  }
+
+  const ChoicesScreen = () => {
+    return (
+      <div>
+        <NavBar/>
+        <Choices/>
+      </div>
+    )
+  }
+
+  const LeaderboardScreen = () => {
+    return (
+      <div>
+        <NavBar/>
+        <Leaderboard/>
+      </div>
+    )
+  }
+  
+
   return (
     <Router>
       <div>
         <section>
-        <NavBar/>
+
+
+
           <Routes>
             {/* Redirect to /home if the user is already signed in */}
           
@@ -41,11 +92,17 @@ function App() {
               path="/"
               element={user ? <Navigate to="/home" /> : <Signup />}
             />
-            <Route path="/home" element={<Home />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/live" element={<Live />} />
+            <Route path="/home" element={<HomeScreen />} />
+            <Route path="/live" element={<LiveScreen />} />
+            <Route path="/selection" element={<SelectionScreen />} />
+            <Route path="/choices" element={<ChoicesScreen />} />
+            <Route path="/leaderboard" element={<LeaderboardScreen />} />
+
           </Routes>
+
+
         </section>
       </div>
     </Router>

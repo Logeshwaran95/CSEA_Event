@@ -107,17 +107,18 @@ const Home = () => {
   ];
 
   return (
-    <div>
+    <div
+    style={{
+      marginTop:"3rem"
+    }}
+    >
   
-
-      <div className={styles.matchContainer}
-
-      >
+      <div className={styles.matchContainer} >
 
         <section>
           <h2
           style={{
-            margin:"1rem"
+            margin:"1rem",
           }}
           >Go Live</h2>
           <div className={styles.liveMatch}>
