@@ -64,7 +64,9 @@ function OffcanvasExample() {
                 cursor: "pointer",
                 color:"white"
             }}
-            >SYNC</Navbar.Brand>
+            >
+              Fantasy League
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
@@ -73,7 +75,7 @@ function OffcanvasExample() {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-${expand}`}>
-                  Offcanvas
+                  Fantasy League
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>

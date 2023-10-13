@@ -10,6 +10,7 @@ import NavBar from './Components/Navbar/Navbar';
 import Selection from './Pages/Selection/Selection';
 import Choices from './Pages/Choices/Choices';
 import Leaderboard from './Pages/Leaderboard/Leadeboard';
+import Footer from './Components/Footer/Footer';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -37,6 +38,7 @@ function App() {
       <div>
         <NavBar/>
         <Home/>
+        <Footer/>
       </div>
     )
   }
@@ -46,6 +48,7 @@ function App() {
       <div>
         <NavBar/>
         <Live/>
+        <Footer/>
       </div>
     )
   }
@@ -55,6 +58,7 @@ function App() {
       <div>
         <NavBar/>
         <Selection/>
+        <Footer/>
       </div>
     )
   }
@@ -64,6 +68,7 @@ function App() {
       <div>
         <NavBar/>
         <Choices/>
+        <Footer/>
       </div>
     )
   }
@@ -73,6 +78,7 @@ function App() {
       <div>
         <NavBar/>
         <Leaderboard/>
+        <Footer/>
       </div>
     )
   }

@@ -180,7 +180,11 @@ const Home = () => {
       
       className={
         styles.match
-      }>
+      }
+      style={{
+        flexWrap:"wrap"
+      }}
+      >
 
         
       <section className={
