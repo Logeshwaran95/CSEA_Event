@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useContext } from 'react';
 import { signOut } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { useNavigate } from 'react-router-dom';
@@ -8,29 +8,141 @@ import Table from 'react-bootstrap/Table';
 import { Image } from 'react-bootstrap';
 import styles from './Home.module.css';
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import ip from '../../config/Ip';
+import { MatchContext } from '../../Context/MatchContext';
+
 
 const Home = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const [userName, setUserName] = useState('John Doe');
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-right',
-    iconColor: 'green',
-    customClass: {
-      popup: 'colored-toast'
-    },
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true
-  });
+  // const [userName, setUserName] = useState();
+  // const [matchid, setMatchid] = useState(0);
+  const { matchid, setMatchid,squaddetail,setSquaddetail } = useContext(MatchContext);
 
-  // useEffect(() => {
-  //   Toast.fire({
-  //     icon: 'success',
-  //     title: 'Signed in successfully',
-  //   });
-  // }, []);
+  const [matchdetail,setMatchdetail] = useState({});
+  // const [squaddetail,setSquaddetail] = useState([]);
+
+  const [showTable, setShowTable] = useState(false);
+
+  const toggleTable = () => {
+    setShowTable(!showTable);
+  };
+
+  const getmatch = async() => {
+      try{
+        const response = await axios.get(`${ip}/getmatch/${matchid}`);
+        console.log("here is match --> ",response.data.data[0]);
+        setMatchdetail(response.data.data[0]);
+      }
+      catch(err){
+        console.log(err);
+        alert(err);
+      }
+  }
+
+  const getmatchid = async() => {
+    try{
+
+        const response = await axios.get(`${ip}/getmatchid`);
+        console.log("here is match id ", response.data.data[0].id);
+        setMatchid(response.data.data[0].id);
+        // alert(response.data.data[0].id);
+    }
+    catch(err){
+        console.log(err);
+        alert(err);
+    }
+  }
+  const calculateScore = async (id) => {
+    try {
+      const response1 = await axios.get(`${ip}/calculatescore/${id}`);
+      console.log(response1.data, "1");
+      
+      setSquaddetail([]);
+
+      return response1;
+    } catch (err) {
+      console.log(err);
+      alert(err);
+      return err;
+    }
+  }
+  
+  const getMatchById = async (id) => {
+    try {
+      const response2 = await axios.get(`${ip}/getmatch/${id}`);
+      console.log(response2.data.data, "live match da");
+      setMatchdetail(response2.data.data);
+      return response2;
+    } catch (err) {
+      console.log(err);
+      alert(err);
+      return err;
+    }
+  }
+  
+  const matchIdIncrement = async () => {
+    try {
+      const response3 = await axios.patch(`${ip}/patchmatchid`, {
+        matchid: matchid + 1
+      });
+      console.log(response3.data, "3");
+      setMatchid(matchid + 1);
+      return response3;
+    } catch (err) {
+      console.log(err);
+      alert(err);
+      return err;
+    }
+  }
+  
+  const getPlayerList = async (id) => {
+    try {
+      const response4 = await axios.get(`${ip}/getplayerlist/${id+1}`);
+      console.log(response4.data.data, "4");
+      setSquaddetail(response4.data.data);
+      // localStorage.setItem("squaddetail",JSON.stringify(response4.data.data));
+      // localStorage.setItem("matchid",id+1);
+      return response4;
+    } catch (err) {
+      console.log(err);
+      alert(err);
+      return err;
+    }
+  }
+  
+  const incrementMatchId = async () => {
+    const response3 = await matchIdIncrement();
+    try {
+      if(matchid%2==0)
+      {
+        const response4 = await getPlayerList(Math.ceil(matchid/2));
+      }
+      else
+      {
+        const data = await calculateScore(Math.ceil(matchid/2));
+        // getmatch();
+        const response2 = await getMatchById(Math.ceil(matchid/2));
+      }
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
+    alert(matchid);
+  }
+
+  useEffect(() => {
+
+      getmatchid();
+      if(matchid%2!=0){
+        getPlayerList(Math.ceil(matchid/2));
+      }
+    
+      getMatchById(Math.ceil(matchid/2));
+      
+
+  },[matchid]);
 
 
 
@@ -106,6 +218,25 @@ const Home = () => {
     },
   ];
 
+  useEffect(() => {
+    console.log("here is squad detail --> ",squaddetail);
+  },[squaddetail])
+
+  const makezero = async () => {
+    try{
+      const response = await axios.put(`${ip}/zeromatchid`).then((res) => {
+        setSquaddetail([]);
+        // console.log("here is squad detail --> ",squaddetail)
+        window.location.reload();
+      })
+      
+    }
+    catch(err){
+      console.log(err);
+      alert(err);
+    }
+  }
+
   return (
     <div
     style={{
@@ -122,23 +253,128 @@ const Home = () => {
           }}
           >Go Live</h2>
           <div className={styles.liveMatch}>
-  <div className={styles.teamFlags}
-        onClick={
-          () => {
-            navigate("/live");
+
+         {
+          matchid==0 ? (
+            <div>
+            <h1>Match Not Started</h1>
+            </div>
+          
+          )
+          :
+          
+            
+              matchid>0 && matchid%2==0 ? 
+              <div className={styles.teamFlags}
+          onClick={
+            () => {
+              navigate("/live",{
+                state: {
+                  matchdetail: matchdetail
+                }
+              });
+            }
           }
-        }
-  >
-    <Image src={liveMatch.team1Flag} alt={liveMatch.team1} className={styles.flagImage} />
-    <span className={styles.vs}>vs</span>
-    <Image src={liveMatch.team2Flag} alt={liveMatch.team2} className={styles.flagImage} />
-  </div>
+    >
+      <Image src={liveMatch.team1Flag} alt={liveMatch.team1} className={styles.flagImage} />
+      <span className={styles.vs}>vs</span>
+      <Image src={liveMatch.team2Flag} alt={liveMatch.team2} className={styles.flagImage} />
+    </div>
+    :
+          <div>
+            <h1>view squad</h1>
+            <Button onClick={toggleTable} variant="primary"
+            style={{
+              width:"200px"
+            }}
+            >
+        Show Table
+      </Button>
+          </div>
+  
+            }
+          
  
-</div>
-<h1 className={styles.currentScore}>{liveMatch.currentScore}</h1>
+        </div>
+
+ 
+{/* <h1 className={styles.currentScore}>{liveMatch.currentScore}</h1> */}
 
         </section>
       </div>
+
+
+      <Modal show={showTable} onHide={toggleTable} size="lg"
+      fullscreen
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Data Table</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Team</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            <tbody>
+              {squaddetail.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.id}</td>
+                  <td>{item.name}</td>
+                  <td>{item.team}</td>
+                  <td>{item.points}</td>
+
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={toggleTable}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+     <center>
+     {
+    auth.currentUser && auth.currentUser.email === "logesh@gmail.com" &&  (
+      <div>
+
+    
+      <Button
+      onClick={
+        () => {
+          incrementMatchId();
+        }
+      }
+      style={{
+        height:"60px",
+        width:"200px"
+      }}
+      >Increment Match
+        </Button>
+        <br></br>
+        <Button
+             style={{
+              height:"60px",
+              marginTop:"1rem",
+              width:"200px"
+            }}
+        onClick={
+          () => {
+            makezero();
+          }
+        }>
+          Make Zero
+        </Button>
+        </div>)
+    }  
+     </center>
 
 
 

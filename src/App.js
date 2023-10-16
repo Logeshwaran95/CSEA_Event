@@ -11,6 +11,7 @@ import Selection from './Pages/Selection/Selection';
 import Choices from './Pages/Choices/Choices';
 import Leaderboard from './Pages/Leaderboard/Leadeboard';
 import Footer from './Components/Footer/Footer';
+import { MatchContextProvider } from './Context/MatchContext';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -105,7 +106,6 @@ function App() {
             <Route path="/selection" element={<SelectionScreen />} />
             <Route path="/choices" element={<ChoicesScreen />} />
             <Route path="/leaderboard" element={<LeaderboardScreen />} />
-
           </Routes>
 
 
