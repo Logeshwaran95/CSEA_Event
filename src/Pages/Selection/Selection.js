@@ -105,7 +105,7 @@ const ChoicesScreen = () => {
       selected === false ? 
       <div>
             <center>
-        <h2 style={{ letterSpacing: '0.1rem', textTransform: 'uppercase', marginTop: '1rem' }}>
+        <h2 style={{ letterSpacing: '0.1rem', textTransform: 'uppercase', marginTop: '1rem',fontWeight:"bold" }}>
           You have Not made any Selection
         </h2>
       </center>

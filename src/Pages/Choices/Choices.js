@@ -14,7 +14,7 @@ import { MatchContext } from '../../Context/MatchContext';
 const PlayerSelection = () => {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
   const totalPoints = selectedPlayers.reduce((total, player) => total + player.points, 0);
-  let remainingPoints = 200 - totalPoints;
+  let remainingPoints = 100 - totalPoints;
   const [selected, setSelected] = useState(false);
   const { matchid, setMatchid,squaddetail,setSquaddetail } = useContext(MatchContext);
 
@@ -49,6 +49,10 @@ const PlayerSelection = () => {
 
     else if (remainingPoints < player.points) {
       Swal.fire('Not Enough Points', 'You do not have enough points to select this player.', 'info');
+    }
+
+    else if (selectedPlayers.length >= 11) {
+      Swal.fire('Maximum Players Selected', 'You cannot select more than 11 players.', 'info');
     }
   
     else {
@@ -94,7 +98,7 @@ const PlayerSelection = () => {
       title: 'Remove Player',
       html: `
         <p>${player.name} (Points: ${player.points})</p>
-        <p>Role: ${player.role}</p>
+        <p>Role: ${player.playerRole}</p>
       `,
       icon: 'warning',
       showCancelButton: true,
@@ -106,8 +110,13 @@ const PlayerSelection = () => {
   };
 
   const savetodatabase = async (players) => {
-    if(players.length <=0 ){
-      Swal.fire('No Selection!', 'You have not selected any players.', 'error');
+    if(players.length !=11 ){
+      Swal.fire('Selection Not Saved!', 'You must select 11 players.', 'error');
+      return;
+
+    }
+    else if (players.filter((player) => player.playerRole === 'captain').length != 1 || players.filter((player) => player.playerRole === 'viceCaptain').length != 1) {
+      Swal.fire('Selection Not Saved!', 'You must select one captain and one vice captain.', 'error');
       return;
     }
     try{
@@ -118,8 +127,6 @@ const PlayerSelection = () => {
         });
         console.log(response);
         Swal.fire('Selection Saved!', 'Your selection has been saved successfully.', 'success');
-        localStorage.removeItem('squaddetail');
-        localStorage.removeItem('matchid');
 
         window.location.reload();
     }
@@ -150,30 +157,78 @@ const PlayerSelection = () => {
   return (
     <div>
       {
-        selected===false? <Row className={styles.playerSelectionContainer}
-        style={{
-          marginTop:"7rem"
-        }}
-        >
-          <Col sm={12} className={styles.remainingPointsContainer}>
-            <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
-          </Col>
-    
-          <Col sm={12}>
+        // squaddetail.length > 0 ? <div>
+        // {
+          selected===false? <Row className={styles.playerSelectionContainer}
+          style={{
+            marginTop:"7rem"
+          }}
+          >
+            <Col sm={12} className={styles.remainingPointsContainer}>
+              <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
+            </Col>
+      
+            <Col sm={12}>
+              
+              <center>
+              <h2
+              style={{
+                letterSpacing:"0.1rem",
+                textTransform:"uppercase",
+                marginTop:"1rem"
+              }}
+              >Selected Players</h2>
+              </center>
+      
+              <Row></Row>
             
-            <center>
-            <h2
-            style={{
-              letterSpacing:"0.1rem",
-              textTransform:"uppercase",
-              marginTop:"1rem"
-            }}
-            >Selected Players</h2>
-            </center>
-    
-            <Row></Row>
-          
-            <ul className={styles.playerList}
+              <ul className={styles.playerList}
+                style={{
+                  display:"flex",
+                  flexDirection:"row",
+                  flexWrap:"wrap",
+                  justifyContent:"space-evenly",
+                  listStyle:"none"
+                }}
+              >
+                {selectedPlayers.map((player) => (
+                 
+                   <li
+                    key={player.id}
+                    onClick={() => handlePlayerRemoval(player)}
+                    className={styles.selectedPlayer}
+                    style={{
+                      width:"30rem",
+                      height:"5rem",
+                      textOverflow:"ellipsis",
+                      overflow:"hidden",
+                      whiteSpace:"nowrap"
+                    }}
+                  >
+                    <Image
+                      src="https://via.placeholder.com/50"
+                      alt={player.name}
+                      roundedCircle
+                      className={styles.playerImage}
+                    />
+                    {player.name} (Role: {player.playerRole}, Points: {player.points} )
+                  </li>
+      
+                ))}
+              </ul>
+            </Col>
+      
+            <Col sm={12}>
+              <center>
+              <h2
+               style={{
+                letterSpacing:"0.1rem",
+                textTransform:"uppercase",
+                marginTop:"1rem"
+              }}
+              >Available Players</h2>
+              </center>
+              <ul className={styles.playerList}
               style={{
                 display:"flex",
                 flexDirection:"row",
@@ -181,109 +236,78 @@ const PlayerSelection = () => {
                 justifyContent:"space-evenly",
                 listStyle:"none"
               }}
-            >
-              {selectedPlayers.map((player) => (
-               
-                 <li
-                  key={player.id}
-                  onClick={() => handlePlayerRemoval(player)}
-                  className={styles.selectedPlayer}
+              >
+                {squaddetail.map((player) => (
+                  <li key={player.id} onClick={() => handlePlayerSelection(player)}
                   style={{
-                    width:"30rem",
+                    width:"20rem",
                     height:"5rem",
-                    textOverflow:"ellipsis",
-                    overflow:"hidden",
-                    whiteSpace:"nowrap"
                   }}
-                >
-                  <Image
-                    src="https://via.placeholder.com/50"
-                    alt={player.name}
-                    roundedCircle
-                    className={styles.playerImage}
-                  />
-                  {player.name} (Role: {player.role}, Points: {player.points} )
-                </li>
-    
-              ))}
-            </ul>
-          </Col>
-    
-          <Col sm={12}>
-            <center>
-            <h2
-             style={{
-              letterSpacing:"0.1rem",
-              textTransform:"uppercase",
-              marginTop:"1rem"
-            }}
-            >Available Players</h2>
-            </center>
-            <ul className={styles.playerList}
-            style={{
-              display:"flex",
-              flexDirection:"row",
-              flexWrap:"wrap",
-              justifyContent:"space-evenly",
-              listStyle:"none"
-            }}
-            >
-              {squaddetail.map((player) => (
-                <li key={player.id} onClick={() => handlePlayerSelection(player)}
-                style={{
-                  width:"20rem",
-                  height:"5rem",
-                }}
-                >
-                  <Image
-                    src="https://via.placeholder.com/50"
-                    alt={player.name}
-                    roundedCircle
-                    className={styles.playerImage}
-                  />
-                  {player.name} (Points: {player.points})
-                </li>
-              ))}
-            </ul>
-          </Col>
-          
-         <center>
-         <Button variant="danger" onClick={clearAllSelections} className={styles.clearButton}
-          style={{
-            width:"200px"
-          }}
-          >
-              Clear All
-            </Button>
-         </center>
-        
-            <br></br>
-          <Col sm={12} className={styles.saveButtonContainer}
-          style={{
-            marginTop:"1rem"
-          }}
-          >
-            <center>
-            <Button onClick={handleSaveSelection}
+                  >
+                    <Image
+                      src="https://via.placeholder.com/50"
+                      alt={player.name}
+                      roundedCircle
+                      className={styles.playerImage}
+                    />
+                    {player.name} (Points: {player.points})
+                  </li>
+                ))}
+              </ul>
+            </Col>
+            
+           <center>
+           <Button variant="danger" onClick={clearAllSelections} className={styles.clearButton}
             style={{
               width:"200px"
             }}
-            >Save Selection</Button>
-            </center>
-            
-          </Col>
-        </Row>
-        : <div
-        style={{
-          marginTop:"7rem"
-        }}
-        >
-          <Col sm={12} className={styles.remainingPointsContainer}>
-            <h2 className={styles.remainingPoints}>You Already Selected </h2>
-          </Col>
-        </div>
-      }
-    </div>
+            >
+                Clear All
+              </Button>
+           </center>
+          
+              <br></br>
+            <Col sm={12} className={styles.saveButtonContainer}
+            style={{
+              marginTop:"1rem"
+            }}
+            >
+              <center>
+              <Button onClick={handleSaveSelection}
+              style={{
+                width:"200px"
+              }}
+              >Save Selection</Button>
+              </center>
+              
+            </Col>
+          </Row>
+          : <div
+          style={{
+            marginTop:"7rem"
+          }}
+          >
+            <Col sm={12} className={styles.remainingPointsContainer}>
+              <h2 className={styles.remainingPoints}>You Already Selected </h2>
+            </Col>
+          </div>
+        }
+      </div>
+      // :
+    //   <div>
+    //     <center>
+    //       <h2
+    //       style={{
+    //         letterSpacing:"0.1rem",
+    //         textTransform:"uppercase",
+    //         marginTop:"7rem",
+    //         fontWeight:"bold"
+    //       }}
+    //       >No Squads Available</h2>
+    //     </center>
+    //   </div>
+    //   }
+    // </div>
   );
 };
 

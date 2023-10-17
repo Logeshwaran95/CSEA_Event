@@ -247,16 +247,18 @@ const Home = () => {
       <div className={styles.matchContainer} >
 
         <section>
-          <h2
+        
+          <div className={styles.liveMatch}
           style={{
-            margin:"1rem",
+            marginTop:"2rem"
           }}
-          >Go Live</h2>
-          <div className={styles.liveMatch}>
+          >
 
          {
           matchid==0 ? (
-            <div>
+            <div
+            
+            >
             <h1>Match Not Started</h1>
             </div>
           
@@ -276,6 +278,11 @@ const Home = () => {
             }
           }
     >
+        {/* <h2
+          style={{
+            margin:"1rem",
+          }}
+          >Go Live</h2> */}
       <Image src={liveMatch.team1Flag} alt={liveMatch.team1} className={styles.flagImage} />
       <span className={styles.vs}>vs</span>
       <Image src={liveMatch.team2Flag} alt={liveMatch.team2} className={styles.flagImage} />
