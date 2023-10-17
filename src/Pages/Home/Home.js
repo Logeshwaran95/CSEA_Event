@@ -32,7 +32,7 @@ const Home = () => {
   const getmatch = async() => {
       try{
         const response = await axios.get(`${ip}/getmatch/${matchid}`);
-        console.log("here is match --> ",response.data.data[0]);
+        // console.log("here is match --> ",response.data.data[0]);
         setMatchdetail(response.data.data[0]);
       }
       catch(err){
@@ -45,7 +45,7 @@ const Home = () => {
     try{
 
         const response = await axios.get(`${ip}/getmatchid`);
-        console.log("here is match id ", response.data.data[0].id);
+        // console.log("here is match id ", response.data.data[0].id);
         setMatchid(response.data.data[0].id);
         // alert(response.data.data[0].id);
     }
@@ -57,7 +57,7 @@ const Home = () => {
   const calculateScore = async (id) => {
     try {
       const response1 = await axios.get(`${ip}/calculatescore/${id}`);
-      console.log(response1.data, "1");
+      console.log(response1.data, "score calculated");
       
       setSquaddetail([]);
 
@@ -87,7 +87,7 @@ const Home = () => {
       const response3 = await axios.patch(`${ip}/patchmatchid`, {
         matchid: matchid + 1
       });
-      console.log(response3.data, "3");
+      // console.log(response3.data, "3");
       setMatchid(matchid + 1);
       return response3;
     } catch (err) {
@@ -100,7 +100,7 @@ const Home = () => {
   const getPlayerList = async (id) => {
     try {
       const response4 = await axios.get(`${ip}/getplayerlist/${id}`);
-      console.log(response4.data.data, "here is player list");
+      // console.log(response4.data.data, "here is player list");
       setSquaddetail(response4.data.data);
       // localStorage.setItem("squaddetail",JSON.stringify(response4.data.data));
       // localStorage.setItem("matchid",id+1);
@@ -114,14 +114,20 @@ const Home = () => {
   
   const incrementMatchId = async () => {
     const response3 = await matchIdIncrement();
+
+    if(matchid%2==1){
+      const data = await calculateScore(Math.ceil(matchid/2));
+    }
+
     try {
       if(matchid%2==1)
       {
         const response4 = await getPlayerList(Math.ceil(matchid/2));
+     
       }
       else
       {
-        const data = await calculateScore(Math.ceil(matchid/2));
+       
         // getmatch();
         const response2 = await getMatchById(Math.ceil(matchid/2));
       }
@@ -219,7 +225,8 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    console.log("here is squad detail --> ",squaddetail);
+    // console.log("here is squad detail --> ",squaddetail);
+    console.log("match id now is ---> ",matchid);
   },[squaddetail])
 
   const makezero = async () => {

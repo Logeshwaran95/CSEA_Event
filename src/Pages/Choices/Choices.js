@@ -122,7 +122,7 @@ const PlayerSelection = () => {
     try{
         const response = await axios.post(`${ip}/addselection`,{
           id:auth.currentUser.uid,
-          mid:matchid,
+          mid:Math.ceil(matchid/2),
           selection:players
         });
         console.log(response);
