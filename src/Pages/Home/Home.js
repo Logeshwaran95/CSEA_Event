@@ -322,7 +322,7 @@ const Home = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Id</th>
+                <th>No</th>
                 <th>Name</th>
                 <th>Team</th>
                 <th>Points</th>
@@ -333,7 +333,7 @@ const Home = () => {
                 .filter(item => item.team === teamName)
                 .map((item, index) => (
                   <tr key={index}>
-                    <td>{item.id}</td>
+                    <td>{index+1}</td>
                     <td>{item.name}</td>
                     <td>{item.team}</td>
                     <td>{item.points}</td>
@@ -391,38 +391,31 @@ const Home = () => {
      </center>
 
 
-     <Table striped bordered hover responsive
-     style={{
-      marginTop:"7rem"
-     }}
-     >
-      <thead>
-        <tr>
-          <th>Match</th>
-          <th>Team 1</th>
-          <th>Team 2</th>
-          {/* <th>Toss</th> */}
-          <th>Stadium</th>
-          {/* <th>Total Runs (Team 1)</th>
-          <th>Total Runs (Team 2)</th>
-          <th>Result</th> */}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((match) => (
-          <tr key={match.id}>
-            <td>{match.id}</td>
-            <td>{match.team1}</td>
-            <td>{match.team2}</td>
-            {/* <td>{match.toss}</td> */}
-            <td>{match.stadium}</td>
-            {/* <td>{match.totalRunsTeam1}</td>
-            <td>{match.totalRunsTeam2}</td>
-            <td>{match.result}</td> */}
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+     <Table striped bordered hover responsive style={{ marginTop: "7rem" }}>
+  <thead>
+    <tr>
+      <th
+      >Match</th>
+      <th>Team 1</th>
+      <th>Team 2</th>
+      <th>Stadium</th>
+    </tr>
+  </thead>
+  <tbody>
+    {data.map((match) => (
+      <tr
+        key={match.id}
+        style={match.id === matchid ? { backgroundColor: 'red', fontWeight: 'bold' } : {}}
+      >
+        <td>{match.id}</td>
+        <td>{match.team1}</td>
+        <td>{match.team2}</td>
+        <td>{match.stadium}</td>
+      </tr>
+    ))}
+  </tbody>
+</Table>
+
 
 
     </div>

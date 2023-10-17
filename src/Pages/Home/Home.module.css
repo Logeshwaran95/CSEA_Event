@@ -101,3 +101,8 @@
   align-items: center;
   justify-content: space-around;
 }
+.currentmatch {
+  background-color: #00FF00; /* Green color */
+  font-weight: bold; /* Optionally, make the text bold for emphasis */
+  display: none;
+}
