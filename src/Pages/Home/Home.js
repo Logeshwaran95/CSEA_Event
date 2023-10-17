@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import ip from '../../config/Ip';
 import { MatchContext } from '../../Context/MatchContext';
+import data from '../../Data';
 
 
 const Home = () => {
@@ -55,12 +56,11 @@ const Home = () => {
     }
   }
   const calculateScore = async (id) => {
+  
     try {
       const response1 = await axios.get(`${ip}/calculatescore/${id}`);
-      console.log(response1.data, "score calculated");
-      
+      // console.log(response1.data, "score calculated");
       setSquaddetail([]);
-
       return response1;
     } catch (err) {
       console.log(err);
@@ -72,7 +72,7 @@ const Home = () => {
   const getMatchById = async (id) => {
     try {
       const response2 = await axios.get(`${ip}/getmatch/${id}`);
-      console.log(response2.data.data, "live match da");
+      // console.log(response2.data.data, "live match da");
       setMatchdetail(response2.data.data);
       return response2;
     } catch (err) {
@@ -135,7 +135,7 @@ const Home = () => {
       console.log(err);
       alert(err);
     }
-    alert(matchid);
+    // alert(matchid);
   }
 
   useEffect(() => {
@@ -156,17 +156,6 @@ const Home = () => {
     setShowModal(!showModal);
   }
 
-  const matchStatistics = {
-    id: 102,
-    team1: 'Team P',
-    team2: 'Team Q',
-    date: '2023-10-12',
-    time: '14:45',
-    scoreTeam1: 220,
-    scoreTeam2: 180,
-    wicketsTeam1: 4,
-    wicketsTeam2: 7,
-  };
 
   const liveMatch = {
     team1: 'India',
@@ -176,58 +165,13 @@ const Home = () => {
     team2Flag: 'https://cdn.britannica.com/78/6078-004-77AF7322/Flag-Australia.jpg',
   };
 
-  const previousMatches = [
-    {
-      id: 101,
-      team1: 'Team A',
-      team2: 'Team B',
-      date: '2023-10-10',
-      time: '09:30',
-    },
-    {
-      id: 102,
-      team1: 'Team P',
-      team2: 'Team Q',
-      date: '2023-10-12',
-      time: '14:45',
-    },
-    {
-      id: 103,
-      team1: 'Team X',
-      team2: 'Team Y',
-      date: '2023-10-14',
-      time: '19:00',
-    },
-  ];
-
-  const upcomingMatches = [
-    {
-      id: 104,
-      team1: 'Team M',
-      team2: 'Team N',
-      date: '2023-10-16',
-      time: '09:30',
-    },
-    {
-      id: 105,
-      team1: 'Team U',
-      team2: 'Team V',
-      date: '2023-10-18',
-      time: '14:45',
-    },
-    {
-      id: 106,
-      team1: 'Team Z',
-      team2: 'Team W',
-      date: '2023-10-20',
-      time: '19:00',
-    },
-  ];
 
   useEffect(() => {
     // console.log("here is squad detail --> ",squaddetail);
     console.log("match id now is ---> ",matchid);
   },[squaddetail])
+
+  const uniqueTeams = [...new Set(squaddetail.map(item => item.team))];
 
   const makezero = async () => {
     try{
@@ -244,6 +188,8 @@ const Home = () => {
     }
   }
 
+
+
   return (
     <div
     style={{
@@ -257,16 +203,28 @@ const Home = () => {
         
           <div className={styles.liveMatch}
           style={{
-            marginTop:"2rem"
+            marginTop:"3rem",
+            width:"40vw",
+            height:"20vh",
+            borderRadius:"15px",
+            //make it 3d color
+            backgroundColor:"#f5f5f5",
+            boxShadow:"5px 5px 5px 5px #888888",
+            
           }}
           >
 
          {
           matchid==0 ? (
-            <div
-            
+            <div>
+            <h1
+            style={{
+              fontWeight:"bold",
+              letterSpacing:"0.1rem",
+            }}
             >
-            <h1>Match Not Started</h1>
+              No Match is Live
+            </h1>
             </div>
           
           )
@@ -290,22 +248,52 @@ const Home = () => {
             margin:"1rem",
           }}
           >Go Live</h2> */}
-      <Image src={liveMatch.team1Flag} alt={liveMatch.team1} className={styles.flagImage} />
+     {
+      data.filter (item => item.id == matchid/2).map((item,index) => (
+        <div
+        key={index}
+        style={{
+          display:"flex",
+          flexDirection:"row",
+          justifyContent:"space-around",
+          alignItems:"center",
+          width:"100%"
+        }}
+        >
+           <Image 
+           src = {item.team1flag}
+      alt={liveMatch.team1} className={styles.flagImage} />
       <span className={styles.vs}>vs</span>
-      <Image src={liveMatch.team2Flag} alt={liveMatch.team2} className={styles.flagImage} />
+      <Image src={item.team2flag} alt={liveMatch.team2} className={styles.flagImage} />
+
+        </div>
+      ))
+
+     }
+
+      
+
     </div>
     :
           <div>
-            <h1>view squad</h1>
+            <h1
+               style={{
+                fontWeight:"bold",
+                letterSpacing:"0.1rem",
+              }}
+            >
+              Match is Live
+            </h1>
             <Button onClick={toggleTable} variant="primary"
             style={{
-              width:"200px"
+              width:"200px",
+              marginTop:"1rem"
             }}
             >
-        Show Table
+        View Squad
       </Button>
           </div>
-  
+
             }
           
  
@@ -322,9 +310,15 @@ const Home = () => {
       fullscreen
       >
         <Modal.Header closeButton>
-          <Modal.Title>Data Table</Modal.Title>
+          <Modal.Title>Squad Table</Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          
+
+          <div>
+      {uniqueTeams.map(teamName => (
+        <div key={teamName}>
+          <h3>{teamName}</h3>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -335,17 +329,23 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {squaddetail.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>{item.name}</td>
-                  <td>{item.team}</td>
-                  <td>{item.points}</td>
-
-                </tr>
-              ))}
+              {squaddetail
+                .filter(item => item.team === teamName)
+                .map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>{item.name}</td>
+                    <td>{item.team}</td>
+                    <td>{item.points}</td>
+                  </tr>
+                ))}
             </tbody>
           </Table>
+        </div>
+      ))}
+    </div>
+
+
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={toggleTable}>
@@ -358,7 +358,6 @@ const Home = () => {
      {
     auth.currentUser && auth.currentUser.email === "logesh@gmail.com" &&  (
       <div>
-
     
       <Button
       onClick={
@@ -368,7 +367,8 @@ const Home = () => {
       }
       style={{
         height:"60px",
-        width:"200px"
+        width:"200px",
+        marginTop:"5rem"
       }}
       >Increment Match
         </Button>
@@ -391,90 +391,40 @@ const Home = () => {
      </center>
 
 
+     <Table striped bordered hover responsive
+     style={{
+      marginTop:"7rem"
+     }}
+     >
+      <thead>
+        <tr>
+          <th>Match</th>
+          <th>Team 1</th>
+          <th>Team 2</th>
+          {/* <th>Toss</th> */}
+          <th>Stadium</th>
+          {/* <th>Total Runs (Team 1)</th>
+          <th>Total Runs (Team 2)</th>
+          <th>Result</th> */}
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((match) => (
+          <tr key={match.id}>
+            <td>{match.id}</td>
+            <td>{match.team1}</td>
+            <td>{match.team2}</td>
+            {/* <td>{match.toss}</td> */}
+            <td>{match.stadium}</td>
+            {/* <td>{match.totalRunsTeam1}</td>
+            <td>{match.totalRunsTeam2}</td>
+            <td>{match.result}</td> */}
+          </tr>
+        ))}
+      </tbody>
+    </Table>
 
-      <Modal show={showModal} onHide={toggleModal} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Match Statistics</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Table striped bordered>
-            <thead>
-              <tr>
-                <th>Team</th>
-                <th>Score</th>
-                <th>Wickets</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{matchStatistics.team1}</td>
-                <td>{matchStatistics.scoreTeam1}</td>
-                <td>{matchStatistics.wicketsTeam1}</td>
-              </tr>
-              <tr>
-                <td>{matchStatistics.team2}</td>
-                <td>{matchStatistics.scoreTeam2}</td>
-                <td>{matchStatistics.wicketsTeam2}</td>
-              </tr>
-            </tbody>
-          </Table>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={toggleModal}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
 
-      <div
-      
-      className={
-        styles.match
-      }
-      style={{
-        flexWrap:"wrap"
-      }}
-      >
-
-        
-      <section className={
-        styles.mat
-      }>
-          <h2>Upcoming Matches</h2>
-          <br></br>
-          <ul className={styles.matchList}>
-            {
-              upcomingMatches.map((match) => (
-                <li key={match.id} className={styles.matchItem} onClick={() => toggleModal()}>
-                  {match.team1} vs. {match.team2} - {match.date}, {match.time}
-                </li>
-              ))
-
-            }
-          </ul>
-        </section>
-
-        <section
-        className={
-          styles.mat
-        }
-        >
-          <h2>Previous Matches</h2>
-          <br></br>
-          <ul className={styles.matchList}>
-            {previousMatches.map((match) => (
-              <li
-                key={match.id}
-                className={styles.matchItem}
-                onClick={() => toggleModal()}
-              >
-                {match.team1} vs. {match.team2} - {match.date}, {match.time}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-      </div>
     </div>
   );
 }

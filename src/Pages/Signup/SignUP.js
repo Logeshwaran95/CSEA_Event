@@ -19,6 +19,16 @@ const Signup = () => {
 
 
     e.preventDefault();
+    
+    if( phone.length != 10){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Invalid Phone Number',
+      });
+      return;
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
@@ -62,6 +72,18 @@ const Signup = () => {
 
   return (
     <main className={styles.container}>
+       <ul className={styles.bg_bubbles}>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
       <section>
         <div className={styles.signupForm}>
           <h2>Fantasy League</h2>
@@ -75,6 +97,9 @@ const Signup = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Email address"
+                className={
+                  styles.inputs
+                }
               />
             </div>
             <div>
@@ -86,6 +111,9 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Password"
+                className={
+                  styles.inputs
+                }
               />
             </div>
             <div>
@@ -97,23 +125,27 @@ const Signup = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 placeholder="Username"
+                className={
+                  styles.inputs
+                }
               />
             </div>
 
             <div>
               <label htmlFor="phone">Phone</label>
               <input
-                type="text"
+                type="number"
                 label="Phone"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
                 placeholder="Phone"
+                className={
+                  styles.inputs
+                }
               />
             </div>
-
-
-
+            
             <br></br>
             <button type="submit" onClick={onSubmit}>
               Sign up

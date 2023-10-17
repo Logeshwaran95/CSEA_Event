@@ -31,12 +31,27 @@ const Login = () => {
 
   return (
     <main className={styles.container}>
+       <ul className={styles.bg_bubbles}>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
       <section>
         <div className={styles.loginForm}>
           <h2>Fantasy League</h2>
-          <form>
-            <div>
-              <label htmlFor="email-address">Email address</label>
+          <form
+          >
+            <div
+            >
+              <label htmlFor="email-address"
+              >Email address</label>
               <input
                 id="email-address"
                 name="email"
@@ -44,6 +59,7 @@ const Login = () => {
                 required
                 placeholder="Email address"
                 onChange={(e) => setEmail(e.target.value)}
+                className={styles.inputs}
               />
             </div>
             <div>
@@ -55,6 +71,7 @@ const Login = () => {
                 required
                 placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)}
+                className={styles.inputs}
               />
             </div>
             <div>

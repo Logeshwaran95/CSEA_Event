@@ -10,6 +10,7 @@ import axios from 'axios';
 import ip from '../../config/Ip';
 import { auth } from '../../config/firebase';
 import { MatchContext } from '../../Context/MatchContext';
+import {useNavigate} from 'react-router-dom';
 
 const PlayerSelection = () => {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
@@ -17,15 +18,13 @@ const PlayerSelection = () => {
   let remainingPoints = 100 - totalPoints;
   const [selected, setSelected] = useState(false);
   const { matchid, setMatchid,squaddetail,setSquaddetail } = useContext(MatchContext);
+  const [numPlayersSelected, setNumPlayersSelected] = useState(0);
 
-
+  const navigate = useNavigate();
 
   const selection = async () => {
     try{
       const response = await axios.get(`${ip}/getselected/${auth.currentUser.uid}`);
-      // if(response.data.data == true){
-      //   setSelected(true);
-      // }
       console.log(response.data.isSelected);
       setSelected(response.data.isSelected);
     }
@@ -35,27 +34,19 @@ const PlayerSelection = () => {
   }
 
   useEffect(() => {
-    selection();
-  },[])
+      selection();
+  }, [squaddetail]);
   
-
-
   const handlePlayerSelection = (player) => {
     const existingPlayer = selectedPlayers.find((p) => p.id === player.id);
-
+  
     if (existingPlayer) {
       Swal.fire('Player Already Selected', 'You cannot select the same player again.', 'info');
-    }
-
-    else if (remainingPoints < player.points) {
+    } else if (remainingPoints < player.points) {
       Swal.fire('Not Enough Points', 'You do not have enough points to select this player.', 'info');
-    }
-
-    else if (selectedPlayers.length >= 11) {
+    } else if (selectedPlayers.length >= 11) {
       Swal.fire('Maximum Players Selected', 'You cannot select more than 11 players.', 'info');
-    }
-  
-    else {
+    } else {
       Swal.fire({
         title: 'Select Role',
         html: `
@@ -71,27 +62,24 @@ const PlayerSelection = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           const playerRole = document.getElementById('playerRole').value;
-          
-          //check if captain or vice captain already selected
-          const captainSelected = selectedPlayers.find((p) => p.role === 'captain');
-          const viceCaptainSelected = selectedPlayers.find((p) => p.role === 'viceCaptain');
-
-          if (playerRole === 'captain' && captainSelected) {
-            Swal.fire('Captain Already Selected', 'You cannot select more than one captain.', 'info');
-
-          }
-          else if (playerRole === 'viceCaptain' && viceCaptainSelected) {
-            Swal.fire('Vice Captain Already Selected', 'You cannot select more than one vice captain.', 'info');
-          }
-          else{
+  
+          const captainSelected = selectedPlayers.find((p) => p.playerRole === 'captain');
+          const viceCaptainSelected = selectedPlayers.find((p) => p.playerRole === 'viceCaptain');
+  
+          if ((playerRole === 'captain' && captainSelected) || (playerRole === 'viceCaptain' && viceCaptainSelected)) {
+            Swal.fire(`${playerRole} Already Selected`, `You cannot select more than one ${playerRole}.`, 'info');
+          } else {
+            const updatedSquaddetail = squaddetail.filter((p) => p.id !== player.id);
+            setNumPlayersSelected(numPlayersSelected + 1);
             setSelectedPlayers([...selectedPlayers, { ...player, playerRole: playerRole }]);
+            setSquaddetail(updatedSquaddetail);
           }
-
-          
         }
       });
     }
   };
+  
+  
 
   const handlePlayerRemoval = (player) => {
     Swal.fire({
@@ -105,6 +93,7 @@ const PlayerSelection = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setSelectedPlayers(selectedPlayers.filter((selected) => selected.id !== player.id));
+        setNumPlayersSelected(numPlayersSelected - 1);
       }
     });
   };
@@ -137,15 +126,12 @@ const PlayerSelection = () => {
   }
 
   const handleSaveSelection = () => {
-    
-    //append match id to each player
+
     const players = selectedPlayers.map((player) => ({ ...player, matchid: matchid }));
     console.log(players);
 
-    //save to database
     savetodatabase(players);
 
-    // Swal.fire('Selection Saved!', message, 'success');
   };
 
   const clearAllSelections = () => {
@@ -157,8 +143,6 @@ const PlayerSelection = () => {
   return (
     <div>
       {
-        // squaddetail.length > 0 ? <div>
-        // {
           selected===false? <Row className={styles.playerSelectionContainer}
           style={{
             marginTop:"7rem"
@@ -166,6 +150,7 @@ const PlayerSelection = () => {
           >
             <Col sm={12} className={styles.remainingPointsContainer}>
               <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
+              <h4 className={styles.remainingPoints}>{numPlayersSelected} Player(s) Selected</h4>
             </Col>
       
             <Col sm={12}>
@@ -188,7 +173,8 @@ const PlayerSelection = () => {
                   flexDirection:"row",
                   flexWrap:"wrap",
                   justifyContent:"space-evenly",
-                  listStyle:"none"
+                  listStyle:"none",
+                  marginTop:"2rem"
                 }}
               >
                 {selectedPlayers.map((player) => (
@@ -205,12 +191,12 @@ const PlayerSelection = () => {
                       whiteSpace:"nowrap"
                     }}
                   >
-                    <Image
+                    {/* <Image
                       src="https://via.placeholder.com/50"
                       alt={player.name}
                       roundedCircle
                       className={styles.playerImage}
-                    />
+                    /> */}
                     {player.name} (Role: {player.playerRole}, Points: {player.points} )
                   </li>
       
@@ -224,7 +210,7 @@ const PlayerSelection = () => {
                style={{
                 letterSpacing:"0.1rem",
                 textTransform:"uppercase",
-                marginTop:"1rem"
+                marginTop:"2rem"
               }}
               >Available Players</h2>
               </center>
@@ -234,7 +220,8 @@ const PlayerSelection = () => {
                 flexDirection:"row",
                 flexWrap:"wrap",
                 justifyContent:"space-evenly",
-                listStyle:"none"
+                listStyle:"none",
+                marginTop:"2rem"
               }}
               >
                 {squaddetail.map((player) => (
@@ -244,12 +231,12 @@ const PlayerSelection = () => {
                     height:"5rem",
                   }}
                   >
-                    <Image
+                    {/* <Image
                       src="https://via.placeholder.com/50"
                       alt={player.name}
                       roundedCircle
                       className={styles.playerImage}
-                    />
+                    /> */}
                     {player.name} (Points: {player.points})
                   </li>
                 ))}
@@ -293,21 +280,7 @@ const PlayerSelection = () => {
           </div>
         }
       </div>
-      // :
-    //   <div>
-    //     <center>
-    //       <h2
-    //       style={{
-    //         letterSpacing:"0.1rem",
-    //         textTransform:"uppercase",
-    //         marginTop:"7rem",
-    //         fontWeight:"bold"
-    //       }}
-    //       >No Squads Available</h2>
-    //     </center>
-    //   </div>
-    //   }
-    // </div>
+
   );
 };
 
