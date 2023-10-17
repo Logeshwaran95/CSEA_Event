@@ -44,7 +44,6 @@ const ChoicesScreen = () => {
         else{
           setSelected(false);
         }
-
     }
     catch(err){
       console.log(err);
@@ -84,12 +83,14 @@ const ChoicesScreen = () => {
         <h3 className={styles.categoryTitle}>Captain</h3>
         {captain && (
           <div className={styles.selectedPlayer}>
-            {/* <Image
-              src="https://via.placeholder.com/50"
+            <Image
+              src={
+                captain.image_url
+              }
               alt={captain.name}
               roundedCircle
               className={styles.playerImage}
-            /> */}
+            />
             {captain.name} (Role: {captain.role}, Points: {captain.points})
           </div>
         )}
@@ -99,12 +100,14 @@ const ChoicesScreen = () => {
         <h3 className={styles.categoryTitle}>Vice Captain</h3>
         {viceCaptain && (
           <div className={styles.selectedPlayer}>
-            {/* <Image
-              src="https://via.placeholder.com/50"
+            <Image
+              src={
+                viceCaptain.image_url
+              }
               alt={viceCaptain.name}
               roundedCircle
               className={styles.playerImage}
-            /> */}
+            />
             {viceCaptain.name} (Role: {viceCaptain.role}, Points: {viceCaptain.points})
           </div>
         )}
@@ -114,12 +117,14 @@ const ChoicesScreen = () => {
         <h3 className={styles.categoryTitle}>Other Players</h3>
         {otherPlayers.map((player) => (
           <div key={player.id} className={styles.selectedPlayer}>
-            {/* <Image
-              src="https://via.placeholder.com/50"
+            <Image
+              src={
+                player.image_url
+              }
               alt={player.name}
               roundedCircle
               className={styles.playerImage}
-            /> */}
+            />
             {player.name} (Role: {player.role}, Points: {player.points})
           </div>
         ))}

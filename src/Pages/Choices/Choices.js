@@ -191,12 +191,14 @@ const PlayerSelection = () => {
                       whiteSpace:"nowrap"
                     }}
                   >
-                    {/* <Image
-                      src="https://via.placeholder.com/50"
+                    <Image
+                      src={
+                        player.image_url
+                      }
                       alt={player.name}
                       roundedCircle
                       className={styles.playerImage}
-                    /> */}
+                    />
                     {player.name} (Role: {player.playerRole}, Points: {player.points} )
                   </li>
       
@@ -231,12 +233,14 @@ const PlayerSelection = () => {
                     height:"5rem",
                   }}
                   >
-                    {/* <Image
-                      src="https://via.placeholder.com/50"
+                    <Image
+                      src={
+                        player.image_url
+                      }
                       alt={player.name}
                       roundedCircle
                       className={styles.playerImage}
-                    /> */}
+                    />
                     {player.name} (Points: {player.points})
                   </li>
                 ))}
