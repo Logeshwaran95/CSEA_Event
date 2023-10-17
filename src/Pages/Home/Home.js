@@ -99,8 +99,8 @@ const Home = () => {
   
   const getPlayerList = async (id) => {
     try {
-      const response4 = await axios.get(`${ip}/getplayerlist/${id+1}`);
-      console.log(response4.data.data, "4");
+      const response4 = await axios.get(`${ip}/getplayerlist/${id}`);
+      console.log(response4.data.data, "here is player list");
       setSquaddetail(response4.data.data);
       // localStorage.setItem("squaddetail",JSON.stringify(response4.data.data));
       // localStorage.setItem("matchid",id+1);
@@ -115,7 +115,7 @@ const Home = () => {
   const incrementMatchId = async () => {
     const response3 = await matchIdIncrement();
     try {
-      if(matchid%2==0)
+      if(matchid%2==1)
       {
         const response4 = await getPlayerList(Math.ceil(matchid/2));
       }
