@@ -12,6 +12,8 @@ const Dream11ScoringSystem = () => {
 
       {/* Batting Points */}
       <h4>Batting Points</h4>
+
+
       <Table striped bordered hover>
         
         <thead>
@@ -27,11 +29,11 @@ const Dream11ScoringSystem = () => {
           </tr>
           <tr>
             <td>For each boundary</td>
-            <td>+1</td>
+            <td>+2</td>
           </tr>
           <tr>
             <td>For each six</td>
-            <td>+2</td>
+            <td>+1</td>
           </tr>
           <tr>
             <td>For a half-century (50 runs)</td>
@@ -64,14 +66,19 @@ const Dream11ScoringSystem = () => {
             <td>+25</td>
           </tr>
           <tr>
+            <td>Bonus for a 3-wicket haul</td>
+            <td>+4</td>
+          </tr>
+          <tr>
             <td>Bonus for a 4-wicket haul</td>
             <td>+8</td>
           </tr>
           <tr>
-            <td>Bonus for a 5-wicket haul</td>
-            <td>+16</td>
-          </tr>
+            <td>Bonus for a 6-wicket haul</td>
+            <td>+8</td>
+            </tr>
           <tr>
+
             <td>Maiden over</td>
             <td>+4</td>
           </tr>
@@ -153,6 +160,30 @@ const Dream11ScoringSystem = () => {
           </tr>
         </tbody>
       </Table>
+
+      <h4>Other Points</h4>
+      <Table striped bordered hover>
+        
+        <thead>
+          <tr>
+            <th>Type of player</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Captain</td>
+            <td>X 2</td>
+          </tr>
+          <tr>
+            <td>Vice Captain</td>
+            <td>X 1.5</td>
+          </tr>
+     
+        </tbody>
+      </Table>
+
+
     </Container>
   );
 };
