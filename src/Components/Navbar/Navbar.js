@@ -93,6 +93,19 @@ function OffcanvasExample() {
                     }}>Home</Link>
                     
                   </Nav.Link>
+                  
+                  <Nav.Link
+                  style={{
+                    color:"white"
+                  }}
+                  >
+                    <Link to="/scoring" style={{
+                        textDecoration:"none",
+                        color:"white",
+                        margin:"1rem"
+                    }}>Scoring System</Link>
+                  </Nav.Link>
+
                   <Nav.Link 
                   style={{
                     color:"white"

@@ -13,7 +13,7 @@ function Footer() {
         fontSize:"1.3rem",
         letterSpacing:"0.1rem",
       }}
-      >CSEA present's Fantasy League </p>
+      >CSEA presents Fantasy League </p>
     </footer>
   );
 }

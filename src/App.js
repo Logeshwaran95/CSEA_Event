@@ -12,6 +12,7 @@ import Choices from './Pages/Choices/Choices';
 import Leaderboard from './Pages/Leaderboard/Leadeboard';
 import Footer from './Components/Footer/Footer';
 import { MatchContextProvider } from './Context/MatchContext';
+import Points from "./Pages/ScoringSystem/Points";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -83,6 +84,16 @@ function App() {
       </div>
     )
   }
+
+  const ScoringScreen = () => {
+    return (
+      <div>
+        <NavBar/>
+        <Points/>
+        <Footer/>
+      </div>
+    )
+  }
   
 
   return (
@@ -106,6 +117,7 @@ function App() {
             <Route path="/selection" element={<SelectionScreen />} />
             <Route path="/choices" element={<ChoicesScreen />} />
             <Route path="/leaderboard" element={<LeaderboardScreen />} />
+            <Route path="/scoring" element={<ScoringScreen />} />
           </Routes>
 
 
