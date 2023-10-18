@@ -204,8 +204,8 @@ const Home = () => {
           <div className={styles.liveMatch}
           style={{
             marginTop:"3rem",
-            width:"40vw",
-            height:"20vh",
+            width:"70vw",
+            height:"40vh",
             borderRadius:"15px",
             //make it 3d color
             backgroundColor:"#f5f5f5",
