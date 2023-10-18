@@ -7,7 +7,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 const Leaderboard = () => {
   const [leaderboardData, setLeaderboardData] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const usersPerPage = 10; // Adjust as needed
+  const usersPerPage = 50; // Adjust as needed
 
   const getData = async () => {
     try {
