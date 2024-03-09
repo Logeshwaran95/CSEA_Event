@@ -80,8 +80,6 @@ const PlayerSelection = () => {
     }
   };
 
-
-
   const handlePlayerRemoval = (player) => {
     Swal.fire({
       title: 'Remove Player',
