@@ -20,7 +20,7 @@ const Signup = () => {
 
     e.preventDefault();
     
-    if( phone.length != 10){
+    if( phone.length !== 10){
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

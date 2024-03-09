@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Swal from 'sweetalert2';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -10,36 +10,37 @@ import axios from 'axios';
 import ip from '../../config/Ip';
 import { auth } from '../../config/firebase';
 import { MatchContext } from '../../Context/MatchContext';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const PlayerSelection = () => {
   const [selectedPlayers, setSelectedPlayers] = useState([]);
   const totalPoints = selectedPlayers.reduce((total, player) => total + player.points, 0);
   let remainingPoints = 100 - totalPoints;
   const [selected, setSelected] = useState(false);
-  const { matchid, setMatchid,squaddetail,setSquaddetail } = useContext(MatchContext);
+  const { matchid, setMatchid, inningsid, setInningsid, squaddetail, setSquaddetail } = useContext(MatchContext);
   const [numPlayersSelected, setNumPlayersSelected] = useState(0);
 
   const navigate = useNavigate();
 
   const selection = async () => {
-    try{
-      const response = await axios.get(`${ip}/getselected/${auth.currentUser.uid}`);
-      console.log(response.data.isSelected);
+    try {
+      const response = await axios.get(`${ip}/getSelected/${auth.currentUser.uid}/${matchid}`);
       setSelected(response.data.isSelected);
+      // const response2 = await axios.get(`${ip}/getPlayerList/${matchid}/${inningsid}`)
+      // setSquaddetail(response2.data.data)
     }
-    catch(err){
+    catch (err) {
       console.log(err);
     }
   }
 
   useEffect(() => {
-      selection();
-  }, [squaddetail]);
-  
+    selection();
+  }, []);
+
   const handlePlayerSelection = (player) => {
     const existingPlayer = selectedPlayers.find((p) => p.id === player.id);
-  
+
     if (existingPlayer) {
       Swal.fire('Player Already Selected', 'You cannot select the same player again.', 'info');
     } else if (remainingPoints < player.points) {
@@ -62,10 +63,10 @@ const PlayerSelection = () => {
       }).then((result) => {
         if (result.isConfirmed) {
           const playerRole = document.getElementById('playerRole').value;
-  
+
           const captainSelected = selectedPlayers.find((p) => p.playerRole === 'captain');
           const viceCaptainSelected = selectedPlayers.find((p) => p.playerRole === 'viceCaptain');
-  
+
           if ((playerRole === 'captain' && captainSelected) || (playerRole === 'viceCaptain' && viceCaptainSelected)) {
             Swal.fire(`${playerRole} Already Selected`, `You cannot select more than one ${playerRole}.`, 'info');
           } else {
@@ -78,8 +79,8 @@ const PlayerSelection = () => {
       });
     }
   };
-  
-  
+
+
 
   const handlePlayerRemoval = (player) => {
     Swal.fire({
@@ -99,7 +100,7 @@ const PlayerSelection = () => {
   };
 
   const savetodatabase = async (players) => {
-    if(players.length !=11 ){
+    if (players.length != 11) {
       Swal.fire('Selection Not Saved!', 'You must select 11 players.', 'error');
       return;
 
@@ -108,18 +109,18 @@ const PlayerSelection = () => {
       Swal.fire('Selection Not Saved!', 'You must select one captain and one vice captain.', 'error');
       return;
     }
-    try{
-        const response = await axios.post(`${ip}/addselection`,{
-          id:auth.currentUser.uid,
-          mid:Math.ceil(matchid/2),
-          selection:players
-        });
-        console.log(response);
-        Swal.fire('Selection Saved!', 'Your selection has been saved successfully.', 'success');
+    try {
+      const response = await axios.post(`${ip}/addselection`, {
+        id: auth.currentUser.uid,
+        mid: matchid,
+        selection: players
+      });
+      console.log(response);
+      Swal.fire('Selection Saved!', 'Your selection has been saved successfully.', 'success');
 
-        window.location.reload();
+      window.location.reload();
     }
-    catch(err){
+    catch (err) {
       console.log(err);
     }
 
@@ -143,95 +144,95 @@ const PlayerSelection = () => {
   return (
     <div>
       {
-          selected===false? <Row className={styles.playerSelectionContainer}
+        selected === false ? <Row className={styles.playerSelectionContainer}
           style={{
-            marginTop:"7rem"
+            marginTop: "7rem"
           }}
-          >
-            <Col sm={12} className={styles.remainingPointsContainer}>
-              <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
-              <h4 className={styles.remainingPoints}>{numPlayersSelected} Player(s) Selected</h4>
-            </Col>
-      
-            <Col sm={12}>
-              
-              <center>
+        >
+          <Col sm={12} className={styles.remainingPointsContainer}>
+            <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
+            <h4 className={styles.remainingPoints}>{numPlayersSelected} Player(s) Selected</h4>
+          </Col>
+
+          <Col sm={12}>
+
+            <center>
               <h2
-              style={{
-                letterSpacing:"0.1rem",
-                textTransform:"uppercase",
-                marginTop:"1rem"
-              }}
+                style={{
+                  letterSpacing: "0.1rem",
+                  textTransform: "uppercase",
+                  marginTop: "1rem"
+                }}
               >Selected Players</h2>
+            </center>
+
+            <Row></Row>
+
+            <ul className={styles.playerList}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+                listStyle: "none",
+                marginTop: "2rem"
+              }}
+            >
+              {selectedPlayers.map((player) => (
+
+                <li
+                  key={player.id}
+                  onClick={() => handlePlayerRemoval(player)}
+                  className={styles.selectedPlayer}
+                  style={{
+                    width: "30rem",
+                    height: "5rem",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap"
+                  }}
+                >
+                  <Image
+                    src={
+                      player.image_url
+                    }
+                    alt={player.name}
+                    roundedCircle
+                    className={styles.playerImage}
+                  />
+                  {player.name} (Role: {player.playerRole}, Points: {player.points} )
+                </li>
+
+              ))}
+            </ul>
+          </Col>
+          {inningsid === 0 &&
+            <Col sm={12}>
+              <center>
+                <h2
+                  style={{
+                    letterSpacing: "0.1rem",
+                    textTransform: "uppercase",
+                    marginTop: "2rem"
+                  }}
+                >Available Players</h2>
               </center>
-      
-              <Row></Row>
-            
               <ul className={styles.playerList}
                 style={{
-                  display:"flex",
-                  flexDirection:"row",
-                  flexWrap:"wrap",
-                  justifyContent:"space-evenly",
-                  listStyle:"none",
-                  marginTop:"2rem"
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-evenly",
+                  listStyle: "none",
+                  marginTop: "2rem"
                 }}
-              >
-                {selectedPlayers.map((player) => (
-                 
-                   <li
-                    key={player.id}
-                    onClick={() => handlePlayerRemoval(player)}
-                    className={styles.selectedPlayer}
-                    style={{
-                      width:"30rem",
-                      height:"5rem",
-                      textOverflow:"ellipsis",
-                      overflow:"hidden",
-                      whiteSpace:"nowrap"
-                    }}
-                  >
-                    <Image
-                      src={
-                        player.image_url
-                      }
-                      alt={player.name}
-                      roundedCircle
-                      className={styles.playerImage}
-                    />
-                    {player.name} (Role: {player.playerRole}, Points: {player.points} )
-                  </li>
-      
-                ))}
-              </ul>
-            </Col>
-      
-            <Col sm={12}>
-              <center>
-              <h2
-               style={{
-                letterSpacing:"0.1rem",
-                textTransform:"uppercase",
-                marginTop:"2rem"
-              }}
-              >Available Players</h2>
-              </center>
-              <ul className={styles.playerList}
-              style={{
-                display:"flex",
-                flexDirection:"row",
-                flexWrap:"wrap",
-                justifyContent:"space-evenly",
-                listStyle:"none",
-                marginTop:"2rem"
-              }}
               >
                 {squaddetail.map((player) => (
                   <li key={player.id} onClick={() => handlePlayerSelection(player)}
-                  style={{
-                    width:"20rem",
-                    height:"5rem",
-                  }}
+                    style={{
+                      width: "20rem",
+                      height: "5rem",
+                    }}
                   >
                     <Image
                       src={
@@ -245,45 +246,44 @@ const PlayerSelection = () => {
                   </li>
                 ))}
               </ul>
-            </Col>
-            
-           <center>
-           <Button variant="danger" onClick={clearAllSelections} className={styles.clearButton}
-            style={{
-              width:"200px"
-            }}
-            >
-                Clear All
-              </Button>
-           </center>
-          
-              <br></br>
-            <Col sm={12} className={styles.saveButtonContainer}
-            style={{
-              marginTop:"1rem"
-            }}
-            >
-              <center>
-              <Button onClick={handleSaveSelection}
+            </Col>}
+          <center>
+            <Button variant="danger" onClick={clearAllSelections} className={styles.clearButton}
               style={{
-                width:"200px"
+                width: "200px"
               }}
+            >
+              Clear All
+            </Button>
+          </center>
+
+          <br></br>
+          <Col sm={12} className={styles.saveButtonContainer}
+            style={{
+              marginTop: "1rem"
+            }}
+          >
+            <center>
+              <Button onClick={handleSaveSelection}
+                style={{
+                  width: "200px"
+                }}
               >Save Selection</Button>
-              </center>
-              
-            </Col>
-          </Row>
+            </center>
+
+          </Col>
+        </Row>
           : <div
-          style={{
-            marginTop:"7rem"
-          }}
+            style={{
+              marginTop: "7rem"
+            }}
           >
             <Col sm={12} className={styles.remainingPointsContainer}>
               <h2 className={styles.remainingPoints}>You Already Selected </h2>
             </Col>
           </div>
-        }
-      </div>
+      }
+    </div>
 
   );
 };

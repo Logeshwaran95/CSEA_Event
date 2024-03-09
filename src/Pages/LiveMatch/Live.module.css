@@ -97,15 +97,16 @@
 .currentPlayers{
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 16px;
+  justify-content: space-around;
   background-color: #fff;
+  text-transform: capitalize;
+}
+.card{
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  text-transform: capitalize;
+  padding: 16px;
 }
-
 .matchStatsHeading{
   font-size: 25px;
   margin: 0;
@@ -133,5 +134,8 @@
 
 .extrasTable{
   margin:2rem;
+}
+.result{
+  margin: auto;
 }
 

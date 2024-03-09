@@ -1,9 +1,10 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useState, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import styles from './Selection.module.css';
 import { auth } from '../../config/firebase';
+import { MatchContext } from '../../Context/MatchContext';
 import ip from '../../config/Ip';
 import axios from 'axios';
 
@@ -13,13 +14,13 @@ const ChoicesScreen = () => {
   const [viceCaptain, setViceCaptain] = useState();
   const [otherPlayers, setOtherPlayers] = useState([]);
 
-
+  const { matchid, setMatchid, inningsid, setInningsid, squaddetail, setSquaddetail } = useContext(MatchContext);
   const [selected, setSelected] = useState(false);
   const [selectedPlayers, setSelectedPlayers] = useState([]);
 
   const isSelected = async () => {
     try{
-      const response = await axios.get(`${ip}/getselected/${auth.currentUser.uid}`);
+      const response = await axios.get(`${ip}/getSelected/${auth.currentUser.uid}/${matchid}`);
       return response.data.isSelected;
     }
     catch(err){
@@ -30,8 +31,9 @@ const ChoicesScreen = () => {
   const getSelected = async () => {
     try{
         if(isSelected){
-          const response = await axios.get(`${ip}/getselection/${auth.currentUser.uid}`);
+          const response = await axios.get(`${ip}/getSelected/${auth.currentUser.uid}/${matchid}`);
           // selectedPlayers=response.data.data[0].selection;
+          console.log(response)
           setSelectedPlayers(response.data.data[0].selection);
           
           setCaptain(response.data.data[0].selection.find((player) => player.playerRole === 'captain'));
