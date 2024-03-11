@@ -145,16 +145,15 @@ const Home = () => {
       <div className={styles.matchContainer} >
 
         <section>
-
           <div className={styles.liveMatch}
             style={{
-              marginTop: "3rem",
+              // marginTop: "3rem",
               width: "70vw",
               height: "40vh",
               borderRadius: "15px",
               //make it 3d color
-              backgroundColor: "#f5f5f5",
-              boxShadow: "5px 5px 5px 5px #888888",
+              // backgroundColor: "#f5f5f5",
+              // boxShadow: "5px 5px 5px 5px #888888",
 
             }}
           >
@@ -177,37 +176,24 @@ const Home = () => {
 
                 (
                   matchid > 0 &&
-                  <>
+                  <div>
                     <div className={styles.teamFlags}>
                       {
                         data.filter(item => item.id == matchid).map((item, index) => (
-                          <div
-                            key={index}
-                            style={{
-                              display: "flex",
-                              flexDirection: "row",
-                              justifyContent: "space-around",
-                              alignItems: "center",
-                              width: "100%"
-                            }}
-                          >
-                            <Image
-                              src={item.team1flag}
-                              alt={liveMatch.team1} className={styles.flagImage} />
+                          <div key={index} className={styles.container}>
+                            <Image src={item.team1flag} alt={liveMatch.team1} className={styles.flagImage} />
                             <span className={styles.vs}>vs</span>
                             <Image src={item.team2flag} alt={liveMatch.team2} className={styles.flagImage} />
-
                           </div>
                         ))}
                     </div>
-                  </>
+                  </div>
                 )
             }
-
-
-
           </div>
-          {inningsid === 0 && matchid > 0 && <div>
+          <div className={styles.break}><br /><br/><br /><br /><br/><br/></div>
+          {inningsid === 0 && matchid > 0 && 
+          <div>
             <br />
             <h1
               style={{
@@ -227,7 +213,7 @@ const Home = () => {
             </Button>
           </div>}
           {matchid > 0 && inningsid > 0 &&
-            <>
+            <div>
               <br />
               <h1
                 style={{
@@ -252,7 +238,7 @@ const Home = () => {
                 }}
               >
                 Match Scores
-              </Button></>}
+              </Button></div>}
         </section>
       </div >
 

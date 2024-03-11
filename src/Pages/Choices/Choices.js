@@ -140,7 +140,9 @@ const PlayerSelection = () => {
 
 
   return (
-    <div>
+    <div style={{
+      minHeight: "100vh"
+    }}>
       {
         selected === false ? <Row className={styles.playerSelectionContainer}
           style={{
@@ -278,7 +280,7 @@ const PlayerSelection = () => {
             }}
           >
             <Col sm={12} className={styles.remainingPointsContainer}>
-              <h2 className={styles.remainingPoints}>You Already Selected </h2>
+              <h2 className={styles.remainingPoints}>You have already selected players for this match!!</h2>
             </Col>
           </div>
       }

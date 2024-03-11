@@ -60,7 +60,8 @@ const ChoicesScreen = () => {
   return (
     <Row className={styles.choicesScreenContainer}
     style={{
-        marginTop:"2rem"
+        marginTop:"2rem",
+        minHeight: "100vh"
     }}
     >
      {
