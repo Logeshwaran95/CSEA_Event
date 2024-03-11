@@ -1,50 +1,50 @@
 /* Home.module.css */
 
 .nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .matchContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    min-width: 90vw;
-    padding: 20px;
-    text-align: center;
-    flex-wrap: wrap;
-  }
-  
-  .matchList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+}
 
-  .list {
-    min-width: 50vw;
-  }
-  
-  .matchItem {
-    cursor: pointer;
-    padding: 10px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    background-color: #fff;
-    transition: background-color 0.3s;
-  }
-  
-  .matchItem:hover {
-    background-color: #f0f0f0;
-  }
-  
-  /* Add more styles as needed */
-  /* Define styles for the live match section */
+.matchContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 90vw;
+  padding: 20px;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.matchList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list {
+  min-width: 50vw;
+}
+
+.matchItem {
+  cursor: pointer;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.matchItem:hover {
+  background-color: #f0f0f0;
+}
+
+/* Add more styles as needed */
+/* Define styles for the live match section */
 .liveMatch {
   display: flex;
   align-items: center;
@@ -57,11 +57,11 @@
 }
 
 /* Style for team flags */
-.teamFlags {
+/* .teamFlags {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 /* Style for flag images */
 .flagImage {
@@ -84,25 +84,54 @@
 .currentScore {
   font-size: 40px;
   font-weight: bold;
-  margin:2rem;
+  margin: 2rem;
   color: #333;
 }
 
-.match{
+.match {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
 }
 
-.mat{
+.mat {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
+
 .currentmatch {
-  background-color: #00FF00; /* Green color */
-  font-weight: bold; /* Optionally, make the text bold for emphasis */
+  background-color: #00FF00;
+  /* Green color */
+  font-weight: bold;
+  /* Optionally, make the text bold for emphasis */
   display: none;
+}
+
+
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.break{
+  display: none;
+}
+@media (max-width: 600px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .flagImage{
+    width: auto;
+  }
+  .break{
+    display: block;
+  }
 }

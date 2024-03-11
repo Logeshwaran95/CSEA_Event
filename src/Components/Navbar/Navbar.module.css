@@ -1,0 +1,17 @@
+.brandcenter {
+    position: absolute;
+    left: 100%;
+    margin-left: auto;
+  }
+  .logo{
+    right: 0;
+    padding: 5px;
+  }
+  .header{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
