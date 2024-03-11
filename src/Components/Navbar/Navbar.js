@@ -10,6 +10,7 @@ import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase';
 import { Button } from 'react-bootstrap';
 import { Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 function OffcanvasExample() {
   const navigate = useNavigate();
@@ -45,11 +46,21 @@ function OffcanvasExample() {
           <Navbar.Toggle aria-controls="navbarCollapse" className={styles.logo} />
           <Navbar.Collapse id="navbarCollapse" className="justify-content-center justify-content-lg-end">
             <Nav>
-              <Nav.Link href="/home">Home</Nav.Link>
-              <Nav.Link href="/scoring">Scoring System</Nav.Link>
-              <Nav.Link href="/choices">Choose Players</Nav.Link>
-              <Nav.Link href="/selection">View Selected Players</Nav.Link>
-              <Nav.Link href="/leaderboard">Leaderboard</Nav.Link>
+              <Nav.Item>
+                <Link to="/home" className="nav-link">Home</Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link to="/scoring" className="nav-link">Scoring System</Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link to="/choices" className="nav-link">Choose Players</Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link to="/selection" className="nav-link">View Selected Players</Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Link to="/leaderboard" className="nav-link">Leaderboard</Link>
+              </Nav.Item>
               <Form>
                 <Button variant="outline-success" onClick={handleLogout}>Logout</Button>
               </Form>

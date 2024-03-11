@@ -4,16 +4,16 @@
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 16px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  font-weight: 900;
 }
-
+@media (max-width: 600px){
+  
+}
 .headerContent {
   display: flex;
   align-items: center;
@@ -32,7 +32,12 @@
 
 .currentRuns {
   font-size: 20px;
-  margin: 0;
+  margin-left: 37vw;
+}
+@media (max-width: 600px){
+  .currentRuns{
+    margin-left: 19vw;
+  }
 }
 /* Add this to your CSS file */
 .centered-section {

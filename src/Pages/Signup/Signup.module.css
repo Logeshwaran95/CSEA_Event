@@ -34,12 +34,11 @@
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    width: 80vw;
     text-align: center;
     font-family: Arial, sans-serif;
     margin: 20px;
   }
-  
   h1 {
     font-size: 24px;
     margin-bottom: 20px;

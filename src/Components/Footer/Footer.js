@@ -7,11 +7,12 @@ function Footer() {
       <p
         style={{
           color: "white",
-          fontSize: "1.3rem",
+          fontSize: "1rem",
           letterSpacing: "0.1rem",
+          paddingTop: "6px"
         }}
       >
-        CSEA presents Fantasy League
+        &copy; Copyright 2024 CSEA-CEG. All Rights Reserved
       </p>
     </footer>
   );

@@ -26,14 +26,11 @@ const PlayerSelection = () => {
     try {
       const response = await axios.get(`${ip}/getSelected/${auth.currentUser.uid}/${matchid}`);
       setSelected(response.data.isSelected);
-      // const response2 = await axios.get(`${ip}/getPlayerList/${matchid}/${inningsid}`)
-      // setSquaddetail(response2.data.data)
     }
     catch (err) {
       console.log(err);
     }
   }
-
   useEffect(() => {
     selection();
   }, []);

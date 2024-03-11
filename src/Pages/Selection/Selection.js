@@ -41,7 +41,7 @@ const ChoicesScreen = () => {
           setOtherPlayers(response.data.data[0].selection.filter((player) => player.playerRole === 'player'));
           setSelected(true);
 
-          console.log(response.data.data[0].selection);
+          console.log(otherPlayers);
         }
         else{
           setSelected(false);
@@ -94,7 +94,7 @@ const ChoicesScreen = () => {
               roundedCircle
               className={styles.playerImage}
             />
-            {captain.name} (Role: {captain.role}, Points: {captain.points})
+            {captain.name} (Role: Captain, Points: {captain.points})
           </div>
         )}
       </div>
@@ -111,7 +111,7 @@ const ChoicesScreen = () => {
               roundedCircle
               className={styles.playerImage}
             />
-            {viceCaptain.name} (Role: {viceCaptain.role}, Points: {viceCaptain.points})
+            {viceCaptain.name} (Role: Vice Captain, Points: {viceCaptain.points})
           </div>
         )}
       </div>
@@ -128,7 +128,7 @@ const ChoicesScreen = () => {
               roundedCircle
               className={styles.playerImage}
             />
-            {player.name} (Role: {player.role}, Points: {player.points})
+            {player.name} (Role: Player, Points: {player.points})
           </div>
         ))}
       </div>

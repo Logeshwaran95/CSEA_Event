@@ -22,9 +22,7 @@ const LiveMatchStats = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <strong>
-          <p className={styles.currentRuns} style={{ marginLeft: "38vw" }}>Match {matchid} - {matchStats?.team1?.toUpperCase()} vs {matchStats?.team2?.toUpperCase()}</p>
-        </strong>
+          <p className={styles.currentRuns}>Match {matchid} {matchStats?.team1?.toUpperCase()} vs {matchStats?.team2?.toUpperCase()}</p>
       </div>
 
       <div className={styles.tossStadiumInfo}>

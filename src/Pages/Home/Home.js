@@ -61,7 +61,8 @@ const Home = () => {
   const getPlayerList = async (id, inningsid) => {
     try {
       const response4 = await axios.get(`${ip}/getPlayerList/${id}/${inningsid}`);
-      setSquaddetail(response4.data.data);
+      const squad = response4.data.data;
+      setSquaddetail(squad)
       return;
     } catch (err) {
       console.log(err);
@@ -112,9 +113,9 @@ const Home = () => {
   };
 
 
-  useEffect(() => {
-    console.log("match id now is ---> ", matchid);
-  }, [squaddetail])
+  // useEffect(() => {
+  //   console.log("match id now is ---> ", matchid);
+  // }, [squaddetail])
 
   const uniqueTeams = [...new Set(squaddetail.map(item => item.team))];
 
@@ -122,7 +123,6 @@ const Home = () => {
     try {
       const response = await axios.put(`${ip}/zeromatchid`).then((res) => {
         setSquaddetail([]);
-        // console.log("here is squad detail --> ",squaddetail)
         window.location.reload();
       })
 
@@ -145,19 +145,7 @@ const Home = () => {
       <div className={styles.matchContainer} >
 
         <section>
-          <div className={styles.liveMatch}
-            style={{
-              // marginTop: "3rem",
-              width: "70vw",
-              height: "40vh",
-              borderRadius: "15px",
-              //make it 3d color
-              // backgroundColor: "#f5f5f5",
-              // boxShadow: "5px 5px 5px 5px #888888",
-
-            }}
-          >
-
+          <div>
             {
               matchid === 0 ? (
                 <div>
@@ -191,7 +179,6 @@ const Home = () => {
                 )
             }
           </div>
-          <div className={styles.break}><br /><br/><br /><br /><br/><br/></div>
           {inningsid === 0 && matchid > 0 && 
           <div>
             <br />
@@ -241,8 +228,6 @@ const Home = () => {
               </Button></div>}
         </section>
       </div >
-
-
       <Modal show={showTable} onHide={toggleTable} size="lg"
         fullscreen
       >
@@ -250,8 +235,6 @@ const Home = () => {
           <Modal.Title>Squad Table</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
-
           <div>
             {uniqueTeams.map(teamName => (
               <div key={teamName}>
@@ -281,8 +264,6 @@ const Home = () => {
               </div>
             ))}
           </div>
-
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={toggleTable}>
@@ -290,7 +271,6 @@ const Home = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
       <center>
         {
           auth.currentUser && auth.currentUser.email === "nikhilprasanna93@gmail.com" && (
@@ -326,8 +306,6 @@ const Home = () => {
             </div>)
         }
       </center>
-
-
       <Table striped bordered hover responsive style={{ marginTop: "7rem" }}>
         <thead>
           <tr>
@@ -352,10 +330,7 @@ const Home = () => {
           ))}
         </tbody>
       </Table>
-
-
-
-    </div >
+    </div>
   );
 }
 
