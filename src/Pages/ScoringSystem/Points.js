@@ -5,7 +5,7 @@ const Dream11ScoringSystem = () => {
   return (
     <Container
     style={{
-        marginTop:"6rem"
+        marginTop:"2rem"
     }}
     >
       <h2>CSEA Fantasy League Scoring System</h2>

@@ -60,7 +60,7 @@ const ChoicesScreen = () => {
   return (
     <Row className={styles.choicesScreenContainer}
     style={{
-        marginTop:"4rem"
+        marginTop:"2rem"
     }}
     >
      {

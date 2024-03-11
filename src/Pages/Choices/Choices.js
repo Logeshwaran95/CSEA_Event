@@ -144,7 +144,8 @@ const PlayerSelection = () => {
       {
         selected === false ? <Row className={styles.playerSelectionContainer}
           style={{
-            marginTop: "7rem"
+            marginTop: "2rem",
+            marginBottom: "1rem"
           }}
         >
           <Col sm={12} className={styles.remainingPointsContainer}>

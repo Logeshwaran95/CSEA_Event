@@ -138,7 +138,7 @@ const Home = () => {
   return (
     <div
       style={{
-        marginTop: "3rem"
+        marginTop: "1rem"
       }}
     >
 
