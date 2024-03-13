@@ -15,24 +15,12 @@ import data from '../../Data';
 const Home = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const { matchid, setMatchid, inningsid, setInningsid, squaddetail, setSquaddetail } = useContext(MatchContext);
-  const [matchdetail, setMatchdetail] = useState({});
+  const { matchid, setMatchid, inningsid, setInningsid, squaddetail, setSquaddetail, getmatchid, getPlayerList, getMatchById, matchdetail } = useContext(MatchContext);
   const [showTable, setShowTable] = useState(false);
 
   const toggleTable = () => {
     setShowTable(!showTable);
   };
-  const getmatchid = async () => {
-    try {
-      const response = await axios.get(`${ip}/getmatchid`);
-      setMatchid(response.data.data[0].id);
-      setInningsid(response.data.data[0].inningsid)
-    }
-    catch (err) {
-      console.log(err);
-      alert(err);
-    }
-  }
   const calculateScore = async (id, inningsid) => {
     try {
       if (inningsid !== 0) {
@@ -40,30 +28,6 @@ const Home = () => {
         setSquaddetail([]);
         return;
       }
-    } catch (err) {
-      console.log(err);
-      alert(err);
-      return err;
-    }
-  }
-
-  const getMatchById = async (id, inningsid) => {
-    try {
-      const response2 = await axios.get(`${ip}/getmatch/${id}/${inningsid}`);
-      setMatchdetail(response2.data.data);
-      return response2;
-    } catch (err) {
-      console.log(err);
-      alert(err);
-      return err;
-    }
-  }
-  const getPlayerList = async (id, inningsid) => {
-    try {
-      const response4 = await axios.get(`${ip}/getPlayerList/${id}/${inningsid}`);
-      const squad = response4.data.data;
-      setSquaddetail(squad)
-      return;
     } catch (err) {
       console.log(err);
       alert(err);
@@ -91,12 +55,14 @@ const Home = () => {
   }
   useEffect(() => {
     const fetch = async () => {
-      await getmatchid();
-      if (inningsid === 0) {
-        await getPlayerList(matchid, inningsid);
-      }
-      if (inningsid === 1 || inningsid === 2) {
-        await getMatchById(matchid, inningsid)
+      if (matchid === -1 && inningsid === -1) {
+        const response  = await getmatchid();
+        if (response.inningsid === 0) {
+          await getPlayerList(response.matchid, response.inningsid);
+        }
+        if (response.inningsid === 1 || response.inningsid === 2) {
+          await getMatchById(response.matchid, response.inningsid)
+        }
       }
     }
     fetch();
@@ -179,26 +145,26 @@ const Home = () => {
                 )
             }
           </div>
-          {inningsid === 0 && matchid > 0 && 
-          <div>
-            <br />
-            <h1
-              style={{
-                fontWeight: "bold",
-                letterSpacing: "0.1rem",
-              }}
-            >
-              Match is Live
-            </h1>
-            <Button onClick={toggleTable} variant="primary"
-              style={{
-                width: "200px",
-                marginTop: "1rem"
-              }}
-            >
-              View Squad
-            </Button>
-          </div>}
+          {inningsid === 0 && matchid > 0 &&
+            <div>
+              <br />
+              <h1
+                style={{
+                  fontWeight: "bold",
+                  letterSpacing: "0.1rem",
+                }}
+              >
+                Match is Live
+              </h1>
+              <Button onClick={toggleTable} variant="primary"
+                style={{
+                  width: "200px",
+                  marginTop: "1rem"
+                }}
+              >
+                View Squad
+              </Button>
+            </div>}
           {matchid > 0 && inningsid > 0 &&
             <div>
               <br />

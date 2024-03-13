@@ -17,7 +17,7 @@ const PlayerSelection = () => {
   const totalPoints = selectedPlayers.reduce((total, player) => total + player.points, 0);
   let remainingPoints = 100 - totalPoints;
   const [selected, setSelected] = useState(false);
-  const { matchid, setMatchid, inningsid, setInningsid, squaddetail, setSquaddetail } = useContext(MatchContext);
+  const { matchid, setMatchid, inningsid, setInningsid, squaddetail, setSquaddetail, getPlayerList, getMatchById, getmatchid } = useContext(MatchContext);
   const [numPlayersSelected, setNumPlayersSelected] = useState(0);
 
   const navigate = useNavigate();
@@ -31,10 +31,24 @@ const PlayerSelection = () => {
       console.log(err);
     }
   }
+
   useEffect(() => {
     selection();
   }, []);
-
+  useEffect(() => {
+    const fetch = async () => {
+      if (matchid === -1 && inningsid === -1) {
+        const response = await getmatchid();
+        if (response.inningsid === 0) {
+          await getPlayerList(response.matchid, response.inningsid);
+        }
+        if (response.inningsid === 1 || response.inningsid === 2) {
+          await getMatchById(response.matchid, response.inningsid)
+        }
+      }
+    }
+    fetch();
+  }, []);
   const handlePlayerSelection = (player) => {
     const existingPlayer = selectedPlayers.find((p) => p.id === player.id);
 
@@ -141,7 +155,7 @@ const PlayerSelection = () => {
       minHeight: "100vh"
     }}>
       {
-        selected === false ? <Row className={styles.playerSelectionContainer}
+        selected === false && inningsid === 0 ? <Row className={styles.playerSelectionContainer}
           style={{
             marginTop: "2rem",
             marginBottom: "1rem"
@@ -271,7 +285,15 @@ const PlayerSelection = () => {
 
           </Col>
         </Row>
-          : <div
+          : selected === false ?<div
+          style={{
+            marginTop: "7rem"
+          }}
+        > <Col sm={12} className={styles.remainingPointsContainer}>
+          <h2 className={styles.remainingPoints}>Match has started!! Player selection window closed!!</h2>
+        </Col></div>
+          : 
+          <div
             style={{
               marginTop: "7rem"
             }}

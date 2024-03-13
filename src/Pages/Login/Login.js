@@ -31,18 +31,18 @@ const Login = () => {
 
   return (
     <main className={styles.container}>
-       <ul className={styles.bg_bubbles}>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+      <ul className={styles.bg_bubbles}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <section>
         <div className={styles.loginForm}>
           <h2>Fantasy League</h2>
