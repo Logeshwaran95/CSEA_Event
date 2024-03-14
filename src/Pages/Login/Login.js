@@ -16,7 +16,7 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       navigate("/home");
-      console.log(user);
+      // console.log(user);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -50,14 +50,14 @@ const Login = () => {
           >
             <div
             >
-              <label htmlFor="email-address"
-              >Email address</label>
+              <label htmlFor="email"
+              >Email</label>
               <input
-                id="email-address"
+                id="email"
                 name="email"
-                type="email"
+                type="text"
                 required
-                placeholder="Email address"
+                placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
                 className={styles.inputs}
               />

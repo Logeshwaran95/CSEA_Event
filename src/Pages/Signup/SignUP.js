@@ -14,6 +14,7 @@ const Signup = () => {
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('');
   const [abacusId, setAbacusId] = useState('');
+  const [cpassword, setCPassword] = useState('')
 
 
   const onSubmit = async (e) => {
@@ -21,21 +22,34 @@ const Signup = () => {
 
     e.preventDefault();
 
-    if (phone.length !== 10) {
+    if (abacusId < 1000 || abacusId >= 10000) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Invalid Phone Number',
+        text: 'Invalid Abacus ID',
       });
       return;
     }
-
+    if (password === '') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Enter password',
+      });
+      return;
+    }
+    if (password !== cpassword) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Passwords don\'t match',
+      });
+      return;
+    }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       // console.log(user);
-
-
       const data = {
         email: email,
         name: username,
@@ -133,7 +147,7 @@ const Signup = () => {
               />
             </div>
             <div>
-              <label htmlFor="phone">Abacus ID</label>
+              <label htmlFor="abacusId">Abacus ID</label>
               <input
                 type="number"
                 label="abacusId"
@@ -155,6 +169,20 @@ const Signup = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Password"
+                className={
+                  styles.inputs
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="cpassword">Confirm Password</label>
+              <input
+                type="password"
+                label="Confirm password"
+                value={cpassword}
+                onChange={(e) => setCPassword(e.target.value)}
+                required
+                placeholder="Confirm Password"
                 className={
                   styles.inputs
                 }

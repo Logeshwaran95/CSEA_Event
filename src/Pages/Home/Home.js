@@ -346,7 +346,12 @@ const Home = () => {
         We wish you the best of luck and hope you enjoy the excitement of fantasy sports!
       </p>
 
-      <p>If you have any questions or concerns, please contact our support team for assistance.</p>
+      <p>If you have any questions or concerns, please contact our team for assistance.</p>
+      <ul>
+        <li>Navaneeth - <a href='tel:+91 9042142160'>+91 9042142160</a></li>
+        <li>Logeshwaran - <a href='tel:+91 9345497171'>+91 9345497171</a></li>
+        <li>Nikhil - <a href='tel:+91 6379066510'>+91 6379066510</a></li>
+      </ul>
     </div>
   );
 }
