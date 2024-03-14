@@ -306,14 +306,14 @@ const Home = () => {
       <ul>
         <li>The fantasy league will take place over two days, the 19th and 20th of March.</li>
         <li>Each day will consist of four matches.</li>
-        <li>Participants will have a one-hour window to select their players for each match.</li>
-        <li>Match scores will be updated after every hour.</li>
+        <li>Participants will have a 90 minutes window to select their players for each match.</li>
+        <li>Match scores will be updated after every 45 minutes.</li>
         <li>The leaderboard will be continuously updated to reflect the current standings.</li>
       </ul>
 
       <h3>2. Player Selection:</h3>
       <ul>
-        <li>Participants must select their players within the designated one-hour window for each match.</li>
+        <li>Participants must select their players within the designated 90 minutes window for each match.</li>
         <li>Players must be selected based on the available player pool for each match.</li>
         <li>Once selected, players cannot be changed until the next selection window opens for the subsequent match.</li>
       </ul>
