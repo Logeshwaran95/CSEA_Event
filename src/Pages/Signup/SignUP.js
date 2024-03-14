@@ -13,14 +13,15 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [phone, setPhone] = useState('');
+  const [abacusId, setAbacusId] = useState('');
 
 
   const onSubmit = async (e) => {
 
 
     e.preventDefault();
-    
-    if( phone.length !== 10){
+
+    if (phone.length !== 10) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -32,32 +33,33 @@ const Signup = () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      console.log(user);
-
-      
-    const data = {
-      email: email,
-      name : username,
-      phno: phone,
-      id: user.uid
-    }
-
-    try{
-      const response = axios.post(`${ip}/signup`, data);
-      console.log(response);
-      navigate("/login");
-    }
-    catch(error){
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-      });
-    }
+      // console.log(user);
 
 
+      const data = {
+        email: email,
+        name: username,
+        phno: phone,
+        id: user.uid,
+        abacusId: abacusId
+      }
 
-     
+      try {
+        const response = axios.post(`${ip}/signup`, data);
+        // console.log(response);
+        navigate("/login");
+      }
+      catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        });
+      }
+
+
+
+
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -72,22 +74,36 @@ const Signup = () => {
 
   return (
     <main className={styles.container}>
-       <ul className={styles.bg_bubbles}>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+      <ul className={styles.bg_bubbles}>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
       <section>
         <div className={styles.signupForm}>
           <h2>Fantasy League</h2>
           <form>
+            <div>
+              <label htmlFor="username">Name</label>
+              <input
+                type="text"
+                label="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                placeholder="Name"
+                className={
+                  styles.inputs
+                }
+              />
+            </div>
             <div>
               <label htmlFor="email-address">Email address</label>
               <input
@@ -97,6 +113,34 @@ const Signup = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 placeholder="Email address"
+                className={
+                  styles.inputs
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="phone">Phone</label>
+              <input
+                type="number"
+                label="Phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                placeholder="Phone"
+                className={
+                  styles.inputs
+                }
+              />
+            </div>
+            <div>
+              <label htmlFor="phone">Abacus ID</label>
+              <input
+                type="number"
+                label="abacusId"
+                value={abacusId}
+                onChange={(e) => setAbacusId(e.target.value)}
+                required
+                placeholder="Abacus ID"
                 className={
                   styles.inputs
                 }
@@ -116,36 +160,6 @@ const Signup = () => {
                 }
               />
             </div>
-            <div>
-              <label htmlFor="username">Username</label>
-              <input
-                type="text"
-                label="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-                placeholder="Username"
-                className={
-                  styles.inputs
-                }
-              />
-            </div>
-
-            <div>
-              <label htmlFor="phone">Phone</label>
-              <input
-                type="number"
-                label="Phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                placeholder="Phone"
-                className={
-                  styles.inputs
-                }
-              />
-            </div>
-            
             <br></br>
             <button type="submit" onClick={onSubmit}>
               Sign up

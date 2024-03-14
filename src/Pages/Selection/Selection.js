@@ -162,6 +162,7 @@ const ChoicesScreen = () => {
             </div>
           </Col>
       }
+      <br/>
     </Row>
   );
 };

@@ -33,7 +33,7 @@ const Dream11ScoringSystem = () => {
           </tr>
           <tr>
             <td>For each six</td>
-            <td>+1</td>
+            <td>+3</td>
           </tr>
           <tr>
             <td>For a half-century (50 runs)</td>
@@ -44,7 +44,7 @@ const Dream11ScoringSystem = () => {
             <td>+8</td>
           </tr>
           <tr>
-            <td>Dismissal for a duck (Batter, Wicket-Keeper & All-Rounder)</td>
+            <td>Dismissal for a duck</td>
             <td>-3</td>
           </tr>
         </tbody>
@@ -79,7 +79,7 @@ const Dream11ScoringSystem = () => {
             </tr>
           <tr>
 
-            <td>Maiden over</td>
+            <td>For each maiden over</td>
             <td>+4</td>
           </tr>
         </tbody>
@@ -105,15 +105,19 @@ const Dream11ScoringSystem = () => {
             <td>+4</td>
           </tr>
           <tr>
-            <td>Between 3.5 - 4.5 runs per over</td>
+            <td>Between 3.5 - 4.49 runs per over</td>
             <td>+2</td>
           </tr>
           <tr>
-            <td>Between 7 - 8 runs per over</td>
+            <td>Between 4.5 - 6 runs per over</td>
+            <td>+1</td>
+          </tr>
+          <tr>
+            <td>Between 6 - 7.99 runs per over</td>
             <td>-2</td>
           </tr>
           <tr>
-            <td>Between 8.01 - 9 runs per over</td>
+            <td>Between 8 - 8.99 runs per over</td>
             <td>-4</td>
           </tr>
           <tr>
@@ -147,11 +151,11 @@ const Dream11ScoringSystem = () => {
             <td>+2</td>
           </tr>
           <tr>
-            <td>Between 40-50 runs per 100 balls</td>
+            <td>Between 40-100 runs per 100 balls</td>
             <td>-2</td>
           </tr>
           <tr>
-            <td>Between 30-39.99 runs per 100 balls</td>
+            <td>Between 30-40 runs per 100 balls</td>
             <td>-4</td>
           </tr>
           <tr>
