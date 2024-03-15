@@ -41,29 +41,29 @@ const ChoicesScreen = () => {
     }
   }
 
-  // const getSelected = async () => {
-  //   try {
-  //     if (isSelected) {
-  //       const response = await axios.get(`${ip}/getSelected/${auth.currentUser.uid}/${matchid}`);
-  //       // selectedPlayers=response.data.data[0].selection;
-  //       // console.log(response)
-  //       setSelectedPlayers(response.data.data[0].selection);
+  const getSelected = async () => {
+    try {
+      if (isSelected) {
+        const response = await axios.get(`${ip}/getSelected/${auth.currentUser.uid}/${matchid}`);
+        // selectedPlayers=response.data.data[0].selection;
+        // console.log(response)
+        setSelectedPlayers(response.data.data[0].selection);
 
-  //       setCaptain(response.data.data[0].selection.find((player) => player.playerRole === 'captain'));
-  //       setViceCaptain(response.data.data[0].selection.find((player) => player.playerRole === 'viceCaptain'));
-  //       setOtherPlayers(response.data.data[0].selection.filter((player) => player.playerRole === 'player'));
-  //       setSelected(true);
+        setCaptain(response.data.data[0].selection.find((player) => player.playerRole === 'captain'));
+        setViceCaptain(response.data.data[0].selection.find((player) => player.playerRole === 'viceCaptain'));
+        setOtherPlayers(response.data.data[0].selection.filter((player) => player.playerRole === 'player'));
+        setSelected(true);
 
-  //       // console.log(otherPlayers);
-  //     }
-  //     else {
-  //       setSelected(false);
-  //     }
-  //   }
-  //   catch (err) {
-  //     console.log(err);
-  //   }
-  // }
+        // console.log(otherPlayers);
+      }
+      else {
+        setSelected(false);
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
+  }
 
   useEffect(() => {
     const fetchSelectedData = async () => {

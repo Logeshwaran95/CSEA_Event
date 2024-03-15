@@ -41,51 +41,6 @@ const Leaderboard = () => {
   };
 
   return (
-    // <div style={{ marginTop: '6rem' }}>
-    //   <center>
-    //     <h2
-    //       style={{
-    //         textTransform: 'uppercase',
-    //         letterSpacing: '0.1rem',
-    //         fontWeight: 'bold',
-    //         marginBottom: '2rem',
-    //       }}
-    //     >
-    //       Leaderboard
-    //     </h2>
-    //   </center>
-    //   {
-    //     leaderboardData.length != 0 ? <Tabs defaultActiveKey="page1" id="pagination-tabs">
-    //     {[...Array(pageCount).keys()].map((index) => (
-    //       <Tab eventKey={`page${index + 1}`} title={`Page ${index + 1}`} key={index}>
-    //         <Table striped bordered hover responsive>
-    //           <thead>
-    //             <tr>
-    //               <th>Rank</th>
-    //               <th>Username</th>
-    //               <th>Points</th>
-    //             </tr>
-    //           </thead>
-    //           <tbody>{displayUsers}</tbody>
-    //         </Table>
-    //       </Tab>
-    //     ))}
-    //   </Tabs>
-    //   :
-    //   <center>
-    //     <h2
-    //       style={{
-    //         textTransform: 'uppercase',
-    //         letterSpacing: '0.1rem',
-    //         fontWeight: 'bold',
-    //         marginBottom: '2rem',
-    //       }}
-    //     >
-    //       No Data Available
-    //     </h2>
-    //   </center>
-    //   }
-    // </div>
     <div style={{ marginTop: '6rem' }}>
       <center>
         <h2
@@ -96,11 +51,56 @@ const Leaderboard = () => {
             marginBottom: '2rem',
           }}
         >
-          Leaderboard will be available after the match starts 
+          Leaderboard
         </h2>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       </center>
+      {
+        leaderboardData.length != 0 ? <Tabs defaultActiveKey="page1" id="pagination-tabs">
+        {[...Array(pageCount).keys()].map((index) => (
+          <Tab eventKey={`page${index + 1}`} title={`Page ${index + 1}`} key={index}>
+            <Table striped bordered hover responsive>
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th>Username</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              <tbody>{displayUsers}</tbody>
+            </Table>
+          </Tab>
+        ))}
+      </Tabs>
+      :
+      <center>
+        <h2
+          style={{
+            textTransform: 'uppercase',
+            letterSpacing: '0.1rem',
+            fontWeight: 'bold',
+            marginBottom: '2rem',
+          }}
+        >
+          No Data Available
+        </h2>
+      </center>
+      }
     </div>
+    // <div style={{ marginTop: '6rem' }}>
+    //   <center>
+    //     <h2
+    //       style={{
+    //         textTransform: 'uppercase',
+    //         letterSpacing: '0.1rem',
+    //         fontWeight: 'bold',
+    //         marginBottom: '2rem',
+    //       }}
+    //     >
+    //       Leaderboard will be available after the match starts 
+    //     </h2>
+    //     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+    //   </center>
+    // </div>
   );
 };
 
