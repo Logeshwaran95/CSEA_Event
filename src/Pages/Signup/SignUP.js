@@ -57,7 +57,6 @@ const Signup = () => {
         id: user.uid,
         abacusId: abacusId
       }
-
       try {
         const response = axios.post(`${ip}/signup`, data);
         // console.log(response);
