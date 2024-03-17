@@ -36,17 +36,28 @@ const Home = () => {
   }
   const incrementMatchId = async () => {
     try {
-      const response3 = await axios.put(`${ip}/incrementMatchId`);
-      const currMatchId = response3.data.data.id
-      const currInningsId = response3.data.data.inningsid
-      setMatchid(currMatchId)
-      setInningsid(currInningsId)
-      if (currInningsId === 0) {
-        await getPlayerList(currMatchId, currInningsId);
-      }
-      if (currInningsId === 1 || currInningsId === 2) {
-        await calculateScore(currMatchId, currInningsId);
-        await getMatchById(currMatchId, currInningsId)
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'You won\'t be able to revert this!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Verified'
+      })
+      if (result.isConfirmed) {
+        const response3 = await axios.put(`${ip}/incrementMatchId`);
+        const currMatchId = response3.data.data.id
+        const currInningsId = response3.data.data.inningsid
+        setMatchid(currMatchId)
+        setInningsid(currInningsId)
+        if (currInningsId === 0) {
+          await getPlayerList(currMatchId, currInningsId);
+        }
+        if (currInningsId === 1 || currInningsId === 2) {
+          await calculateScore(currMatchId, currInningsId);
+          await getMatchById(currMatchId, currInningsId)
+        }
       }
     } catch (err) {
       console.log(err);
