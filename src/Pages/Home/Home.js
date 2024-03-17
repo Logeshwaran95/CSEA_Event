@@ -139,6 +139,8 @@ const Home = () => {
                               <Image src={item.team1flag} alt={liveMatch.team1} className={styles.flagImage} />
                               <span className={styles.vs}>vs</span>
                               <Image src={item.team2flag} alt={liveMatch.team2} className={styles.flagImage} />
+                              <div>{item.toss}</div>
+                              <div>{item.commentary}</div>
                             </div>
                           ))}
                       </div>
