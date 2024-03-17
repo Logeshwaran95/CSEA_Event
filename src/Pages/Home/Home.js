@@ -152,6 +152,24 @@ const Home = () => {
     //                       </div>
     //                     ))}
     //                 </div>
+    // <br/>
+    // <div>
+    //   {
+    //     data.filter(item => item.id == matchid).map((item, index) => (
+    //       <div key={index} className={styles.container}>
+    //         <strong>{item.toss}</strong>
+    //       </div>
+    //     ))}
+    // </div>
+    // <br/>
+    // <div>
+    //   {
+    //     data.filter(item => item.id == matchid).map((item, index) => (
+    //       <div key={index} className={styles.container}>
+    //         <div>{item.commentary}</div>
+    //       </div>
+    //     ))}
+    // </div>
     //               </div>
     //             )
     //         }
