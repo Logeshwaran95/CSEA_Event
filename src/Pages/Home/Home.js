@@ -139,7 +139,23 @@ const Home = () => {
                               <Image src={item.team1flag} alt={liveMatch.team1} className={styles.flagImage} />
                               <span className={styles.vs}>vs</span>
                               <Image src={item.team2flag} alt={liveMatch.team2} className={styles.flagImage} />
-                              <div>{item.toss}</div>
+                            </div>
+                          ))}
+                      </div>
+                      <br/>
+                      <div>
+                        {
+                          data.filter(item => item.id == matchid).map((item, index) => (
+                            <div key={index} className={styles.container}>
+                              <strong>{item.toss}</strong>
+                            </div>
+                          ))}
+                      </div>
+                      <br/>
+                      <div>
+                        {
+                          data.filter(item => item.id == matchid).map((item, index) => (
+                            <div key={index} className={styles.container}>
                               <div>{item.commentary}</div>
                             </div>
                           ))}
