@@ -151,174 +151,176 @@ const PlayerSelection = () => {
 
 
   return (
-    // <div style={{
-    //   minHeight: "100vh"
-    // }}>
-    //   {
-    //     selected === false && inningsid === 0 ? <Row className={styles.playerSelectionContainer}
-    //       style={{
-    //         marginTop: "2rem",
-    //         marginBottom: "1rem"
-    //       }}
-    //     >
-    //       <Col sm={12} className={styles.remainingPointsContainer}>
-    //         <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
-    //         <h4 className={styles.remainingPoints}>{numPlayersSelected} Player(s) Selected</h4>
-    //       </Col>
-
-    //       <Col sm={12}>
-
-    //         <center>
-    //           <h2
-    //             style={{
-    //               letterSpacing: "0.1rem",
-    //               textTransform: "uppercase",
-    //               marginTop: "1rem"
-    //             }}
-    //           >Selected Players</h2>
-    //         </center>
-
-    //         <Row></Row>
-
-    //         <ul className={styles.playerList}
-    //           style={{
-    //             display: "flex",
-    //             flexDirection: "row",
-    //             flexWrap: "wrap",
-    //             justifyContent: "space-evenly",
-    //             listStyle: "none",
-    //             marginTop: "2rem"
-    //           }}
-    //         >
-    //           {selectedPlayers.map((player) => (
-
-    //             <li
-    //               key={player.id}
-    //               onClick={() => handlePlayerRemoval(player)}
-    //               className={styles.selectedPlayer}
-    //               style={{
-    //                 width: "30rem",
-    //                 height: "5rem",
-    //                 textOverflow: "ellipsis",
-    //                 overflow: "hidden",
-    //                 whiteSpace: "nowrap"
-    //               }}
-    //             >
-    //               <Image
-    //                 src={
-    //                   player.image_url
-    //                 }
-    //                 alt={player.name}
-    //                 roundedCircle
-    //                 className={styles.playerImage}
-    //               />
-    //               {player.name} (Role: {player.playerRole}, Points: {player.points} )
-    //             </li>
-
-    //           ))}
-    //         </ul>
-    //       </Col>
-    //       {inningsid === 0 &&
-    //         <Col sm={12}>
-    //           <center>
-    //             <h2
-    //               style={{
-    //                 letterSpacing: "0.1rem",
-    //                 textTransform: "uppercase",
-    //                 marginTop: "2rem"
-    //               }}
-    //             >Available Players</h2>
-    //           </center>
-    //           <ul className={styles.playerList}
-    //             style={{
-    //               display: "flex",
-    //               flexDirection: "row",
-    //               flexWrap: "wrap",
-    //               justifyContent: "space-evenly",
-    //               listStyle: "none",
-    //               marginTop: "2rem"
-    //             }}
-    //           >
-    //             {squaddetail.map((player) => (
-    //               <li key={player.id} onClick={() => handlePlayerSelection(player)}
-    //                 style={{
-    //                   width: "20rem",
-    //                   height: "5rem",
-    //                 }}
-    //               >
-    //                 <Image
-    //                   src={
-    //                     player.image_url
-    //                   }
-    //                   alt={player.name}
-    //                   roundedCircle
-    //                   className={styles.playerImage}
-    //                 />
-    //                 {player.name} (Points: {player.points})
-    //               </li>
-    //             ))}
-    //           </ul>
-    //         </Col>}
-    //       <center>
-    //         <Button variant="danger" onClick={clearAllSelections} className={styles.clearButton}
-    //           style={{
-    //             width: "200px"
-    //           }}
-    //         >
-    //           Clear All
-    //         </Button>
-    //       </center>
-
-    //       <br></br>
-    //       <Col sm={12} className={styles.saveButtonContainer}
-    //         style={{
-    //           marginTop: "1rem"
-    //         }}
-    //       >
-    //         <center>
-    //           <Button onClick={handleSaveSelection}
-    //             style={{
-    //               width: "200px"
-    //             }}
-    //           >Save Selection</Button>
-    //         </center>
-
-    //       </Col>
-    //     </Row>
-    //       : selected === false ?<div
-    //       style={{
-    //         marginTop: "7rem"
-    //       }}
-    //     > <Col sm={12} className={styles.remainingPointsContainer}>
-    //       <h2 className={styles.remainingPoints}>Match has started!! Player selection window closed!!</h2>
-    //     </Col></div>
-    //       : 
-    //       <div
-    //         style={{
-    //           marginTop: "7rem"
-    //         }}
-    //       >
-    //         <Col sm={12} className={styles.remainingPointsContainer}>
-    //           <h2 className={styles.remainingPoints}>You have already selected players for this match!!</h2>
-    //         </Col>
-    //       </div>
-    //   }
-    // </div>
-    <div style={{ marginTop: '6rem' }}>
-      <center>
-        <h2
+    <div style={{
+      minHeight: "100vh"
+    }}>
+      {
+        selected === false && inningsid === 0 ? <Row className={styles.playerSelectionContainer}
           style={{
-            textTransform: 'uppercase',
-            letterSpacing: '0.1rem',
-            fontWeight: 'bold',
-            marginBottom: '2rem',
+            marginTop: "2rem",
+            marginBottom: "1rem"
           }}
         >
-          You will be able to choose players once the match starts
-        </h2>
-        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      </center>
+          <Col sm={12} className={styles.remainingPointsContainer}>
+            <h2 className={styles.remainingPoints}>{remainingPoints} Points Remaining</h2>
+            <h4 className={styles.remainingPoints}>{numPlayersSelected} Player(s) Selected</h4>
+          </Col>
+
+          <Col sm={12}>
+
+            <center>
+              <h2
+                style={{
+                  letterSpacing: "0.1rem",
+                  textTransform: "uppercase",
+                  marginTop: "1rem"
+                }}
+              >Selected Players</h2>
+            </center>
+
+            <Row></Row>
+
+            <ul className={styles.playerList}
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                justifyContent: "space-evenly",
+                listStyle: "none",
+                marginTop: "2rem"
+              }}
+            >
+              {selectedPlayers.map((player) => (
+
+                <li
+                  key={player.id}
+                  onClick={() => handlePlayerRemoval(player)}
+                  className={styles.selectedPlayer}
+                  style={{
+                    width: "30rem",
+                    height: "5rem",
+                    textOverflow: "ellipsis",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap"
+                  }}
+                >
+                  <Image
+                    src={
+                      player.image_url
+                    }
+                    alt={player.name}
+                    roundedCircle
+                    className={styles.playerImage}
+                  />
+                  {player.name} (Role: {player.playerRole}, Points: {player.points} )
+                </li>
+
+              ))}
+            </ul>
+          </Col>
+          {inningsid === 0 &&
+            <Col sm={12}>
+              <center>
+                <h2
+                  style={{
+                    letterSpacing: "0.1rem",
+                    textTransform: "uppercase",
+                    marginTop: "2rem"
+                  }}
+                >Available Players</h2>
+              </center>
+              <ul className={styles.playerList}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  flexWrap: "wrap",
+                  justifyContent: "space-evenly",
+                  listStyle: "none",
+                  marginTop: "2rem"
+                }}
+              >
+                {squaddetail.map((player) => (
+                  <li key={player.id} onClick={() => handlePlayerSelection(player)}
+                    style={{
+                      width: "20rem",
+                      height: "5rem",
+                    }}
+                  >
+                    <Image
+                      src={
+                        player.image_url
+                      }
+                      alt={player.name}
+                      roundedCircle
+                      className={styles.playerImage}
+                    />
+                    {player.name} (Points: {player.points})
+                  </li>
+                ))}
+              </ul>
+            </Col>}
+          <center>
+            <Button variant="danger" onClick={clearAllSelections} className={styles.clearButton}
+              style={{
+                width: "200px"
+              }}
+            >
+              Clear All
+            </Button>
+          </center>
+
+          <br></br>
+          <Col sm={12} className={styles.saveButtonContainer}
+            style={{
+              marginTop: "1rem"
+            }}
+          >
+            <center>
+              <Button onClick={handleSaveSelection}
+                style={{
+                  width: "200px"
+                }}
+              >Save Selection</Button>
+            </center>
+
+          </Col>
+        </Row>
+          : selected === false ? <div
+            style={{
+              marginTop: "7rem"
+            }}
+          > <Col sm={12} className={styles.remainingPointsContainer}>
+              <h2 className={styles.remainingPoints}>Match has started!! Player selection window closed!!</h2>
+            </Col></div>
+            :
+            <div
+              style={{
+                marginTop: "7rem"
+              }}
+            >
+              <Col sm={12} className={styles.remainingPointsContainer}>
+                <h2 className={styles.remainingPoints}>You have already selected players for this match!!</h2>
+              </Col>
+            </div>
+      }
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
     </div>
+
+    // <div style={{ marginTop: '6rem' }}>
+    //   <center>
+    //     <h2
+    //       style={{
+    //         textTransform: 'uppercase',
+    //         letterSpacing: '0.1rem',
+    //         fontWeight: 'bold',
+    //         marginBottom: '2rem',
+    //       }}
+    //     >
+    //       You will be able to choose players once the match starts
+    //     </h2>
+    //   </center>
+    // </div>
   );
 };
 
