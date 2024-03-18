@@ -266,7 +266,7 @@ const data = [{
     "$oid": "65f7a5bbfc9ad86b03323649"
   },
   "id": "2",
-  "team1": "Lucknow Super Giants ",
+  "team1": "Lucknow Super Giants",
   "team2": "Delhi Capitals",
   "toss": "LSG won the toss and elected to bat first",
   "team1flag": "https://i.pinimg.com/564x/42/92/9f/42929f323d5f435c7838c8d7ab26f40b.jpg",
@@ -574,7 +574,7 @@ const data = [{
     "$oid": "65f7a6befc9ad86b0332364a"
   },
   "id": "3",
-  "team1": "Kolkata Night Riders ",
+  "team1": "Kolkata Knight Riders ",
   "team2": "Sunrisers Hyderabad",
   "toss": "KKR won the toss and elected to field first",
   "team1flag": "https://i.pinimg.com/564x/11/c1/67/11c167cbf1f87346c479fb0cd37c291d.jpg",
@@ -810,7 +810,7 @@ const data = [{
     "$oid": "65f7a78cfc9ad86b0332364b"
   },
   "id": "4",
-  "team1": "Gujarat Titans ",
+  "team1": "Gujarat Titans",
   "team2": "Mumbai Indians",
   "team1flag": "https://i.pinimg.com/564x/24/58/35/245835be9c23261523858a643af3aaf2.jpg",
   "team2flag": "https://logotyp.us/file/mumbai-indians.svg",
@@ -1027,10 +1027,10 @@ const data = [{
     "$oid": "65f7a81bfc9ad86b0332364c"
   },
   "id": "5",
-  "team1": "Royal Challengers Bangalore ",
+  "team1": "Royal Challengers Bangalore",
   "team2": "Lucknow Super Giants",
   "team1flag": "https://logotyp.us/file/royal-challengers.svg",
-  "team2flag": "https://i.pinimg.com/564x/11/c1/67/11c167cbf1f87346c479fb0cd37c291d.jpghttps://i.pinimg.com/564x/42/92/9f/42929f323d5f435c7838c8d7ab26f40b.jpg",
+  "team2flag": "https://i.pinimg.com/564x/42/92/9f/42929f323d5f435c7838c8d7ab26f40b.jpg",
   "commentary": "Welcome to the thrilling clash between the Royal Challengers Bangalore (RCB) and the Lucknow Super Giants (LSG), live from the iconic M. Chinnaswamy Stadium in Bangalore! We've witnessed some sensational cricket so far, and today promises to be no different. The Chinnaswamy pitch is well known for its batting-friendly characteristics. Expect to see some explosive batting displays from both teams. Analyzing the batting depth of both RCB and LSG will be interesting. How well they can handle the loss of wickets and keep the scoreboard ticking could be a crucial factor. It will be interesting to see how LSG bounces back after their batting collapse.  Their ability to regroup and adapt their bowling strategies will be crucial.",
   "toss": " LSG won the toss and elected to field first",
   "stadium": "M.Chinnaswamy Stadium,Bangalore",
@@ -1307,7 +1307,7 @@ const data = [{
     "$oid": "65f7a849fc9ad86b0332364e"
   },
   "id": "6",
-  "team1": "Mumbai Indians ",
+  "team1": "Mumbai Indians",
   "team2": "Chennai Super Kings",
   "team1flag": "https://logotyp.us/file/mumbai-indians.svg",
   "team2flag": "https://i.pinimg.com/564x/ea/40/fd/ea40fd13fa7d46618c5567146f07ba41.jpg",
@@ -1542,7 +1542,7 @@ const data = [{
     "$oid": "65f7a88afc9ad86b0332364f"
   },
   "id": "7",
-  "team1": "Sunrisers Hyderabad ",
+  "team1": "Sunrisers Hyderabad",
   "team2": "Gujarat Titans",
   "team1flag": "https://logotyp.us/file/sunrisers-hyderabad.svg",
   "team2flag": "https://i.pinimg.com/564x/24/58/35/245835be9c23261523858a643af3aaf2.jpg",
@@ -1822,8 +1822,8 @@ const data = [{
     "$oid": "65f7a8d9fc9ad86b03323650"
   },
   "id": "8",
-  "team1": "Delhi Capitals ",
-  "team2": "Kolkata Night Riders",
+  "team1": "Delhi Capitals",
+  "team2": "Kolkata Knight Riders",
   "team1flag": "https://logotyp.us/file/delhi-capitals.svg",
   "team2flag": "https://i.pinimg.com/564x/11/c1/67/11c167cbf1f87346c479fb0cd37c291d.jpg",
   "commentary": "Welcome to the exhilarating clash between the Delhi Capitals (DC) and the Kolkata Knight Riders (KKR) here at the iconic Arun Jaitley Stadium in Delhi! The pitch at the Feroz Shah Kotla Stadium has historically favored batsmen, with true bounce and even pace. But as the match progresses, spinners might come into play, adding an extra dimension to the game. Both teams will need their bowlers to be disciplined and accurate, taking advantage of any swing or seam movement on offer. With the excitement levels soaring, it's time for cricket aficionados to settle in and enjoy the spectacle",
