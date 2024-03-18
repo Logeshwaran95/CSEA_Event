@@ -53,7 +53,7 @@ const LiveMatchStats = () => {
 
       <center><h4
         className={styles.matchStatsHeading}
-      >Batting Stats of {matchStats?.team1}</h4></center>
+      >Batting Stats of {matchStats?.battingFirst}</h4></center>
 
       <Table bordered hover className={styles.battingTable}>
         <thead>
@@ -83,7 +83,7 @@ const LiveMatchStats = () => {
 
       <center><h4
         className={styles.matchStatsHeading}
-      >Bowling Stats of {matchStats?.team2}</h4></center>
+      >Bowling Stats of {matchStats?.bowlingFirst}</h4></center>
 
       <Table bordered hover className={styles.bowlingTable}>
         <thead>
@@ -113,7 +113,7 @@ const LiveMatchStats = () => {
 
       {inningsid === 2 && <>
         <center>
-          <h4 className={styles.matchStatsHeading}>Batting Stats of {matchStats?.team2}</h4></center>
+          <h4 className={styles.matchStatsHeading}>Batting Stats of {matchStats?.bowlingFirst}</h4></center>
 
         <Table bordered hover className={styles.battingTable}>
           <thead>
@@ -143,7 +143,7 @@ const LiveMatchStats = () => {
 
         <center><h4
           className={styles.matchStatsHeading}
-        >Bowling Stats of {matchStats?.team1}</h4></center>
+        >Bowling Stats of {matchStats?.battingFirst}</h4></center>
 
         <Table bordered hover className={styles.bowlingTable}>
           <thead>
