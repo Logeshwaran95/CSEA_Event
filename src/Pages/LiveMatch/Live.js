@@ -31,13 +31,13 @@ const LiveMatchStats = () => {
       </div>
       <div className={styles.card}>
         <div className={styles.currentPlayers}>
-          <p className={styles.currentBattingTeam}><strong>{matchStats?.team1}:</strong>  {matchStats?.totalRunsTeam1}</p>
+          <p className={styles.currentBattingTeam}><strong>{matchStats?.battingFirst}:</strong>  {matchStats?.totalRunsTeam1}</p>
           {inningsid === 1 &&
-            <p className={styles.currentBowlingTeam}><strong>{matchStats?.team2}:</strong> Yet to bat</p>
+            <p className={styles.currentBowlingTeam}><strong>{matchStats?.bowlingFirst}:</strong> Yet to bat</p>
           }
           {inningsid === 2 &&
             <p className={styles.currentBowlingTeam}>
-              <strong>{matchStats?.team2}:</strong> {matchStats?.totalRunsTeam2}
+              <strong>{matchStats?.bowlingFirst}:</strong> {matchStats?.totalRunsTeam2}
             </p>
           }
         </div>
