@@ -356,7 +356,7 @@ const Home = () => {
 
         <h3>4. Match Scores:</h3>
         <ul>
-          <li>Match scores will be updated after every hour to reflect the ongoing matches.</li>
+          <li>Match scores will be updated after every 45 minutes to reflect the ongoing matches.</li>
           <li>Participants can view the live scores and track the performance of their selected players in real-time.</li>
         </ul>
 
@@ -382,6 +382,7 @@ const Home = () => {
           <li>Logeshwaran - <a href='tel:+91 9345497171'>+91 9345497171</a></li>
           <li>Nikhil - <a href='tel:+91 6379066510'>+91 6379066510</a></li>
         </ul>
+        <p>Please Join our Whatsapp Group for more updates: <a href='https://chat.whatsapp.com/Lqhrd8GUo1wACo3sxGjtIL'>https://chat.whatsapp.com/Lqhrd8GUo1wACo3sxGjtIL</a></p>
       </div>
     </>
   );
