@@ -119,14 +119,19 @@ const PlayerSelection = () => {
       return;
     }
     try {
+      Swal.fire({
+        title: 'Loading...',
+        allowOutsideClick: false,
+        showConfirmButton: false
+      });
       const response = await axios.post(`${ip}/addselection`, {
         id: auth.currentUser.uid,
         mid: matchid,
         selection: players
       });
-      console.log(response);
+      // console.log(response);
+      Swal.close();
       Swal.fire('Selection Saved!', 'Your selection has been saved successfully.', 'success');
-
       window.location.reload();
     }
     catch (err) {
